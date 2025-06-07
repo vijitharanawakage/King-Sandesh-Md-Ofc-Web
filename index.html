@@ -1,0 +1,336 @@
+<!DOCTYPE html>  <html lang="en">  <head>  <meta charset="UTF-8">  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>KING-SANDESH-MD-OFFICIAL-WEB-SITE</title>  
+<style> 
+    /* Loading Screen */#loading { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #0a0a0f; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1s ease; }/* Spinner */ .spinner { width: 60px; height: 60px; border: 6px solid transparent; border-top: 6px solid #0ff; border-right: 6px solid #f0f; border-radius: 50%; animation: spin 1.2s linear infinite; box-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #f0f, 0 0 80px #f0f; margin-bottom: 30px; }
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+#loading p { font-size: 1.5rem; color: #0ff; text-shadow: 0 0 5px #0ff, 0 0 10px #0ff; letter-spacing: 2px; font-weight: 600; } * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }  body { background: #0a0a23; color: #fff; overflow-x: hidden; }
+
+/* Particle Background */ #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
+
+/* Navigation Bar */ .navbar { background: rgba(0, 0, 0, 0.9); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 100; box-shadow: 0 0 15px #00ffcc; }
+
+.navbar ul { list-style: none; display: flex; justify-content: center; }
+
+.navbar ul li { margin: 0 25px; }
+
+.navbar ul li a { color: #00ffcc; text-decoration: none; font-size: 18px; position: relative; transition: color 0.3s; }
+
+.navbar ul li a::after { content: ''; position: absolute; width: 0; height: 2px; background: #ff0077; bottom: -5px; left: 0; transition: width 0.3s; }
+<!-- Navigation menu එකට එකතු කරන්න -->
+<li><a href="#about">About Us</a></li>
+
+.navbar ul li a:hover::after { width: 100%; }
+
+.navbar ul li a:hover { color: #ff0077; text-shadow: 0 0 10px #ff0077; }
+
+/* Hero Section */ .hero { height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; position: relative; overflow: hidden; }
+
+.hero-content h1 { font-size: 70px; color: #00ffcc; text-shadow: 0 0 20px #00ffcc; animation: glitch 2s infinite; }
+
+.hero-content .typing { font-size: 28px; color: #fff; margin: 20px 0; overflow: hidden; white-space: nowrap; border-right: 3px solid #ff0077; animation: typing 4s steps(40, end) infinite, blink 0.75s step-end infinite; }
+
+.hero-content .btn { padding: 15px 40px; background: #ff0077; color: #fff; text-decoration: none; border-radius: 5px; font-size: 20px; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 0 10px #ff0077; }
+
+.hero-content .btn:hover { transform: scale(1.1); box-shadow: 0 0 30px #ff0077; }
+
+/* Services Section */ .services { padding: 100px 20px; text-align: center; background: rgba(255, 255, 255, 0.05); }
+
+.services h2 { font-size: 40px; color: #00ffcc; margin-bottom: 50px; text-shadow: 0 0 15px #00ffcc; }
+
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+
+.service-card { background: rgba(0, 0, 0, 0.7); padding: 20px; border-radius: 10px; transition: transform 0.3s, box-shadow 0.3s; animation: fadeIn 1s ease-in-out; }
+
+.service-card:hover { transform: translateY(-10px); box-shadow: 0 0 20px #00ffcc; }
+
+.service-card h3 { color: #ff0077; font-size: 24px; margin-bottom: 15px; }
+
+.service-card p { color: #ccc; font-size: 16px; }
+
+/* Team Section */ .team { padding: 100px 20px; text-align: center; }
+
+.team h2 { font-size: 40px; color: #00ffcc; margin-bottom: 50px; text-shadow: 0 0 15px #00ffcc; }
+
+.team-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+
+.team-member { background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; width: 250px; transition: transform 0.3s, box-shadow 0.3s; animation: popIn 1s ease-in-out; }
+
+.team-member:hover { transform: translateY(-10px); box-shadow: 0 0 20px #ff0077; }
+
+.team-member img { width: 100%; border-radius: 15px; margin-bottom: 15px; /border: 2px solid #00ffcc;/ }
+
+.team-member h3 { color: #ff0077; font-size: 22px; }
+
+.team-member p { color: #ccc; font-size: 16px; }
+
+/* Contact Section */ .contact { padding: 100px 20px; text-align: center; background: rgba(255, 255, 255, 0.05); }
+
+.contact h2 { font-size: 40px; color: #00ffcc; margin-bottom: 50px; text-shadow: 0 0 15px #00ffcc; }
+
+.contact form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+
+.contact input, .contact textarea { padding: 15px; background: rgba(255, 255, 255, 0.1); border: 1px solid #00ffcc; border-radius: 5px; color: #fff; font-size: 16px; }
+
+.contact input:focus, .contact textarea:focus { outline: none; box-shadow: 0 0 10px #00ffcc; }
+
+.contact button { padding: 15px; background: #ff0077; border: none; border-radius: 5px; color: #fff; font-size: 18px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
+
+.contact button:hover { transform: scale(1.05); box-shadow: 0 0 20px #ff0077; }
+
+/* Footer */ .footer { background: #0f0f1a; padding: 20px; text-align: center; }
+
+.footer p { color: #ccc; }
+
+/* Animations */ @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(2px, -2px); } 60% { transform: translate(-2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
+
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+
+@keyframes blink { from, to { border-color: transparent; } 50% { border-color: #ff0077; } }
+
+@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+@keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+/* Responsive Design */ @media (max-width: 768px) { .hero-content h1 { font-size: 40px; }
+
+.hero-content .typing {
+font-size: 20px;
+}
+
+.navbar ul li {
+margin: 0 10px;
+}
+
+.team-member {
+width: 100%;
+max-width: 300px;
+}
+
+}
+
+.cntct { text-decoration: none; color: orange; font-weight: 700; }
+
+}.channel-buttons {
+
+display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 20px; }
+
+.cyber-btn { display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, #0ff 0%, #00f 100%); color: #000; font-weight: bold; text-decoration: none; border-radius: 8px; box-shadow: 0 0 15px #0ff, 0 0 25px #00f; transition: all 0.3s ease-in-out; font-size: 18px; position: relative; overflow: hidden; }
+
+.cyber-btn::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,255,255,0.4) 0%, transparent 70%); transform: rotate(45deg); animation: glow 3s linear infinite; pointer-events: none; }
+
+.cyber-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #0ff, #0f0); box-shadow: 0 0 20px #0ff, 0 0 30px #0f0; color: #000; }
+
+@keyframes glow { 0% { transform: rotate(0deg) translate(-50%, -50%); } 100% { transform: rotate(360deg) translate(-50%, -50%); } } </style>
+
+</head>  
+<body>
+    <!-- Cyberpunk Loading Screen -->
+<div id="loading">
+  <div class="spinner"></div>
+  <p>Initializing system...</p>
+</div>  
+    <!-- Particle Background -->  
+    <div id="particles-js"></div>  <!-- Navigation Bar -->  
+<nav class="navbar">  
+    <ul>  
+        <li><a href="#home">𝙷𝙾𝙼𝙴</a></li>  
+        <li><a href="#services">𝚂𝙴𝚁𝚅𝙸𝙲𝙴𝚂</a></li>  
+        <li><a href="#team">𝚃𝙴𝙰𝙼</a></li>  
+        <li><a href="#contact">𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝚄𝚂</a></li>  
+        <li><a href="#officialchanal">𝙾𝙵𝙵𝙸𝙲𝙸𝙰𝙻 𝙻𝙸𝙽𝙺𝚂</a></li>  </ul></nav>  <!-- Hero Section -->  <section class="hero" id="home">  
+    <div class="hero-content">  
+        <h1>KING-SANDESH-MD-OFFICIAL-WEB</h1>  
+        <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=50&pause=1000&color=33ff00&center=true&width=910&height=100&lines=The+Best;Multi+Device+Bot+Created+In+Sri+Lanka;Please+Scroll+Down+To+More" alt="Typing SVG">
+  </a>  
+        <a href="https://github.com/vijitharanawakage/KING-SANDESH-MD" class="btn">Deploy KING-SANDESH-MD</a>  </div></section>  <!-- Services Section -->  <section class="services" id="services">  
+    <h2>Bot Features</h2>  
+    <div class="services-grid">  
+      <div class="service-card">  
+            <h3>Code Dycripting</h3>  
+            <p>Code Dycripting service.</p>  
+        </div>  
+        <div class="service-card">  
+            <h3>Bot developing</h3>  
+            <p>Whatsapp user bot creating and devoloping.</p>  </div>  
+    <div class="service-card">  
+        <h3>Network Security</h3>  
+        <p>Protect your Whatsapp with our advanced security solutions.</p>  
+    </div>  
+    <div class="service-card">  
+        <h3>Github Services</h3>  
+        <p>Many github tools for coding works.</p>  
+    </div>  
+    <div class="service-card">  
+        <h3>Linked Device Services</h3>  
+        <p>Whatsapp linked device PAIR CODE and QR CODE generators.</p>  
+    </div>  
+</div></section> <!-- Team Section -->  <section class="team" id="team">  <h2>KSMD Bot Owners</h2>  
+<div class="team-grid">  
+    <div class="team-member">  
+        <img src="https://files.catbox.moe/nbnp8t.jpg" alt="team-member">  
+        <h3>Sandesh Bhashana [MR UNKNOWN]</h3>  
+        <p>KSMD Bot Owner</p><br>  
+        <a class="cntct" href="https://wa.me/+94752661225?text=𝙷𝙸_𝚆𝙴𝙱-𝙴𝙺𝙴𝙽-𝙰𝚅𝙴-𝙾𝚆𝙽𝙴𝚁-𝚂𝙴𝙲𝚃𝙸𝙾𝙽🙈">ᴄᴏɴᴛᴀᴄᴛ ʙᴏᴛ ᴏᴡɴᴇʀ</a>  
+    </div>  
+    <div class="team-member">  
+        <img src="https://files.catbox.moe/bun6bn.jpg" alt="Team Member">  
+        <h3>Semina Adusara [GRAY WOLF]</h3>  
+<p>Beta Testor And Second Owner</p>  
+        <a class="cntct" href="https://wa.me/+94771185902?text=𝙷𝙸-𝙺𝚂𝙼𝙳-𝚆𝙴𝙱-𝙴𝙺𝙴𝙽-𝙰𝚅𝙴-𝙱𝙾𝚃-𝚂𝚄𝙿𝙸𝚁𝙸𝚈𝙰𝙺👊">ᴄᴏɴᴛᴀᴄᴛ ꜱᴇᴄᴏɴᴅ ᴏᴡɴᴇʀ</a>  
+     </section>  <!-- Contact Section -->  <section class="contact" id="contact">  
+    <h2>Contact Us Via Email</h2>  
+    <form id="contact-form">  
+        <input type="text" id="name" placeholder="Your Name" required>  
+        <input type="email" id="email" placeholder="Your Email Address" required>  
+        <textarea id="message" placeholder="Your Message" rows="5" required></textarea>  
+        <button type="submit">Send Message</button>  
+    </form>  
+</section> 
+<!-- About Us Section -->
+<section id="about" style="padding: 100px 20px; text-align: center; background: rgba(255, 255, 255, 0.05);">
+  <h2 style="font-size: 40px; color: #00ffcc; margin-bottom: 30px;">About Us</h2>
+  <div class="typewriter-container">
+    <p class="typewriter-text"></p>
+  </div>
+</section>
+
+<style>
+  .typewriter-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .typewriter-text {
+    color: #ccc;
+    font-size: 18px;
+    white-space: pre-wrap;
+    overflow: hidden;
+    border-right: 2px solid #00ffcc;
+    animation: blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #00ffcc; }
+  }
+</style>
+
+<script>
+  const text = `𝚃𝙷𝙴 𝙺𝙸𝙽𝙶 𝚂𝙰𝙽𝙳𝙴𝚂𝙷 𝙼𝚄𝙻𝚃𝙸 𝙳𝙴𝚅𝙸𝙲𝙴 𝙸𝚂 𝚃𝙷𝙴 𝙱𝙴𝚂𝚃 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃 𝙸𝚂 𝙲𝚁𝙴𝙰𝚃𝙴𝙳 𝙱𝚈 𝙿𝚁𝙾𝙵𝙴𝚂𝚂𝙾𝚁 𝚂𝙰𝙽𝙳𝙴𝚂𝙷 𝙱𝙷𝙰𝚂𝙷𝙰𝙽𝙰👊.𝚃𝙷𝙸𝚂 𝙸𝚂 24𝙷 𝙾𝙽𝙻𝙸𝙽𝙴 𝚆𝙾𝚁𝙺𝙸𝙽𝙶 𝙿𝚁𝙾𝙶𝚁𝙰𝙼𝙼𝙴🙈.𝚈𝙾𝚄 𝙲𝙰𝙽 𝙳𝙴𝙿𝙻𝙾𝚈𝙴𝙳 𝙸𝚃 𝙵𝚁𝙾𝙼 𝙶𝙸𝚃𝙷𝚄𝙱 𝙰𝙽𝙳 𝙳𝙸𝚁𝙴𝙲𝚃 𝙼𝙰𝚂𝚂𝙰𝙶𝙴 𝙵𝙾𝚁 𝙼𝙴 𝙸𝙽 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿💙.𝚃𝙷𝙸𝚂 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃 𝙸𝚂 𝙲𝚁𝙴𝙰𝚃𝙴𝙳 𝙸𝙽 2025.𝚃𝙷𝙸𝚂 𝙿𝚁𝙾𝙹𝙴𝙲𝚃 𝙸𝚂 𝚁𝙴𝙿𝚁𝙴𝚂𝙴𝙽𝚃 𝙱𝚈 𝘿𝘼𝙍𝙆 𝘿𝙍𝘼𝙂𝙊𝙉 𝙁𝘼𝙈𝙄𝙇𝙔 𝙊𝙁𝘾🗿.𝐆𝐑𝐀𝐘 𝐖𝐎𝐋𝐅 𝐀𝐍𝐃 𝐌𝐑 𝐔𝐍𝐊𝐍𝐎𝐖𝐍 𝙰𝚁𝙴 𝙾𝚆𝙽𝙴𝚁 𝙾𝙵 𝚃𝙷𝙸𝚂🤒.`;
+
+  const target = document.querySelector('.typewriter-text');
+  let index = 0;
+
+  function type() {
+    if (index < text.length) {
+      target.textContent += text.charAt(index);
+      index++;
+      setTimeout(type, 25); // speed: 25ms per character
+    }
+  }
+
+  window.addEventListener('load', type);
+</script> <!-- officialchanal Section -->  <section class="officialchanal" id="officialchanal">  
+   <section class="contact" id="officialchanal">  <h2>Official Links</h2>  
+  <div style="max-width: 800px; margin: 0 auto;">  
+    <p style="font-size: 18px; color: #ccc; margin-bottom: 30px;">  
+        
+    </p>  <div class="channel-buttons">  
+  <a href="https://whatsapp.com/channel/0029Vb5saAU4Y9lfzhgBmS2N" target="_blank" class="cyber-btn">⚡ ᴡʜᴀᴛꜱᴀᴘᴘ ᴄʜᴀɴɴᴇʟ</a>  
+  <a href="https://tiktok.com/@mr__unknown_sandesh" target="_blank" class="cyber-btn">🚀 ᴛɪᴋᴛᴏᴋ ᴘᴀɢᴇ</a>  
+  <a href="https://wa.me/+94752661225?text=𝙷𝙸_𝚆𝙴𝙱-𝙴𝙺𝙴𝙽-𝙰𝚅𝙴🙈" target="_blank" class="cyber-btn">🔥 ᴡʜᴀᴛꜱᴀᴘᴘ ɴᴜᴍʙᴇʀ</a>
+  <a href="https://github.com/vijitharanawakage" target="_blank" class="cyber-btn">🗿 ɢɪᴛʜᴜʙ ʀᴇᴘᴏꜱɪᴛᴏʀʏ</a>
+  <a href="https://www.instagram.com/mr__unknown_sandesh/profilecard/" target="_blank" class="cyber-btn">🫧 ɪɴꜱᴛᴀɢʀᴀᴍ</a>
+</div>  </div>  
+</section>  
+
+  </p>
+</section>
+
+<!-- Footer -->  
+<footer class="footer">  
+    <p>© 2025 King-Sandesh-Multi-Device-Edition. All Rights Reserved.</p> 
+    <footer class="footer">
+ <!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+// Loading animation hide
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loading = document.getElementById('loading');
+    if (loading) {
+      loading.style.opacity = '0';
+      setTimeout(() => {
+        loading.style.display = 'none';
+      }, 1000);
+    }
+  }, 3500);
+});
+
+// Particle Background
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 80, density: { enable: true, value_area: 800 } },
+    color: { value: "#00ffcc" },
+    shape: { type: "circle" },
+    opacity: { value: 0.5, random: true },
+    size: { value: 3, random: true },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#ff0077",
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 2,
+      direction: "none",
+      random: false,
+      straight: false,
+      out_mode: "out"
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: true, mode: "push" },
+      resize: true
+    },
+    modes: {
+      repulse: { distance: 100, duration: 0.4 },
+      push: { particles_nb: 4 }
+    }
+  },
+  retina_detect: true
+});
+
+// WhatsApp Form Submission
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if (name && email && message) {
+    const whatsappMessage = `New Contact Form Submission:%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`;
+
+    const whatsappURL = `https://api.whatsapp.com/send?phone=94752661225&text=${whatsappMessage}`;
+
+    window.open(whatsappURL, '_blank');
+
+    alert('Message prepared for WhatsApp! Please send it from the WhatsApp window.');
+    this.reset();
+
+  } else {
+    alert('Please fill in all fields.');
+  }
+});</script></body>
+
+  </html>
