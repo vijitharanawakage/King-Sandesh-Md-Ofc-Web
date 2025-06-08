@@ -139,6 +139,7 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <li><a href="#services">𝙱𝙾𝚃 𝙵𝙴𝙰𝚃𝚄𝚁𝙴𝚂</a></li>  
         <li><a href="#team">𝙺𝚂𝙼𝙳 𝙱𝙾𝚃 𝙾𝚆𝙽𝙴𝚁𝚂</a></li>  
         <li><a href="#contact">𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝚄𝚂</a></li>
+        <li><a href="#comments-section">𝙲𝙾𝙼𝙼𝙴𝙽𝚃 𝚂𝙴𝙲𝚃𝙸𝙾𝙽</a></li>
         <li><a href="#officialchanal">𝙾𝙵𝙵𝙸𝙲𝙸𝙰𝙻 𝙻𝙸𝙽𝙺𝚂</a></li>  </ul></nav>  <!-- Hero Section -->  <section class="hero" id="home">  
     <div class="hero-content">  
         <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Black+Ops+One&size=45&pause=1000&color=FF0000&center=true&width=910&height=100&lines=KING-SANDESH-MD" alt="Typing SVG" /></a>  
@@ -147,7 +148,7 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
   </a>  
         <a href="https://github.com/vijitharanawakage/KING-SANDESH-MD" class="btn">Deploy KING-SANDESH-MD</a>  </div></section>  <!-- Services Section -->  <section class="services" id="services">  
     <h2>Bot Features</h2>  
-            <div class="features-container">
+    <div class="features-container">
     <table class="features-table" style="width:100%; border-collapse: collapse;">
       <thead>
         <tr style="background-color: #1C290F;">
@@ -171,8 +172,8 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <tr><td style="padding: 10px; border: 1px solid #ddd;">Settings with Antidelete 😻</td><td style="padding: 10px; border: 1px solid #ddd;">✅</td></tr>
       </tbody>
     </table>
- </div>
-</section>
+    </div>
+  </section>
 </div></section> <!-- Team Section -->  <section class="team" id="team">  <h2>KSMD Bot Owners</h2>  
 <div class="team-grid">  
     <div class="team-member">  
@@ -267,6 +268,18 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 </div>  </div>  
 </section>  
 
+<body><!-- Comment Section with Permanent Storage + Clear Button -->
+<section class="contact" id="comments-section">
+  <h2>Comment Section</h2>
+  <form id="comment-form">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <textarea id="comment" placeholder="Your Comment" rows="4" required></textarea>
+    <button type="submit">Post Comment</button>
+    <button type="button" id="clear-comments" style="margin-left: 10px; background-color: #ff0055;">Clear All Comments</button>
+  </form>
+  <div id="comments-container" style="margin-top: 30px; text-align: left;"></div>
+</section></body>
+
   </p>
 </section>
 
@@ -282,7 +295,8 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
-  // Loading animation hide
+
+// Loading animation hide
 window.addEventListener('load', () => {
   setTimeout(() => {
     const loading = document.getElementById('loading');
@@ -354,6 +368,48 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 
   } else {
     alert('Please fill in all fields.');
+  }
+});
+
+// Load comments from localStorage
+function loadComments() {
+  const savedComments = JSON.parse(localStorage.getItem('comments')) || [];
+  const container = document.getElementById('comments-container');
+  container.innerHTML = '';
+  savedComments.reverse().forEach(({ name, comment }) => {
+    const commentBox = document.createElement('div');
+    commentBox.style.background = 'rgba(255,255,255,0.05)';
+    commentBox.style.border = '1px solid #00ffcc';
+    commentBox.style.borderRadius = '8px';
+    commentBox.style.padding = '15px';
+    commentBox.style.marginBottom = '15px';
+    commentBox.innerHTML = `<strong style="color:#ff0077;">${name}</strong><p style="color:#ccc;">${comment}</p>`;
+    container.appendChild(commentBox);
+  });
+}
+
+// Submit comment
+document.addEventListener('DOMContentLoaded', loadComments);
+
+document.getElementById('comment-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const comment = document.getElementById('comment').value.trim();
+  if (!name || !comment) return;
+
+  const savedComments = JSON.parse(localStorage.getItem('comments')) || [];
+  savedComments.push({ name, comment });
+  localStorage.setItem('comments', JSON.stringify(savedComments));
+
+  document.getElementById('comment-form').reset();
+  loadComments();
+});
+
+// Clear all comments
+document.getElementById('clear-comments').addEventListener('click', function() {
+  if (confirm("Are you sure you want to delete all comments?")) {
+    localStorage.removeItem('comments');
+    loadComments();
   }
 });</script></body>
 
