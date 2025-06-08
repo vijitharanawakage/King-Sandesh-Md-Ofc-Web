@@ -222,7 +222,7 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 </section> 
 <!-- About Us Section -->
 <section id="about" style="padding: 100px 20px; text-align: center; background: rgba(255, 255, 255, 0.05);">
-  <h2 style="font-size: 40px; color: #00ffcc; margin-bottom: 30px;">About Us</h2>
+  <h2>About Us</h2>
   <div class="typewriter-container">
     <p class="typewriter-text"></p>
   </div>
@@ -504,6 +504,114 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   } else {
     alert('Please fill in all fields.');
   }
-});</script></body>
+});
+// Initialize on load
+document.addEventListener('DOMContentLoaded', renderComments);
+
+        // Auto-scroll to home section on page load
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+            
+            createCyberVibe();
+            rotateLogo();
+            addNavGlow();
+        };
+
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            // Reset animations when closing
+            if (!navLinks.classList.contains('active')) {
+                document.querySelectorAll('.nav-links li').forEach(item => {
+                    item.style.transition = 'none';
+                    setTimeout(() => {
+                        item.style.transition = 'all 0.4s ease';
+                    }, 10);
+                });
+            }
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Create cyber vibe animation
+        function createCyberVibe() {
+            const cyberVibe = document.getElementById('cyberVibe');
+            const colors = ['#00f3ff', '#6e8efb', '#a777e3', '#4facfe'];
+            
+            // Create moving lines
+            for (let i = 0; i < 30; i++) {
+                const line = document.createElement('div');
+                line.className = 'cyber-line';
+                line.style.width = `${Math.random() * 300 + 100}px`;
+                line.style.top = `${Math.random() * 100}%`;
+                line.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                line.style.animationDelay = `${Math.random() * 5}s`;
+                line.style.opacity = Math.random() * 0.5 + 0.1;
+                line.style.background = `linear-gradient(to right, transparent, ${colors[Math.floor(Math.random() * colors.length)]}, transparent)`;
+                cyberVibe.appendChild(line);
+            }
+            
+            // Create pulsing dots
+            for (let i = 0; i < 50; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'cyber-dot';
+                dot.style.left = `${Math.random() * 100}%`;
+                dot.style.top = `${Math.random() * 100}%`;
+                dot.style.animationDuration = `${Math.random() * 3 + 1}s`;
+                dot.style.animationDelay = `${Math.random() * 2}s`;
+                cyberVibe.appendChild(dot);
+            }
+        }
+        
+        // Rotate logo
+        function rotateLogo() {
+            const logo = document.querySelector('.logo');
+            let rotation = 0;
+            
+            setInterval(() => {
+                rotation += 1;
+                if (rotation >= 360) rotation = 0;
+                logo.style.transform = `rotate(${rotation}deg)`;
+            }, 100);
+        }
+        
+        // Add glow effect to navigation items on scroll
+        function addNavGlow() {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-links a');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= sectionTop - 300) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }</script></body>
 
     </html>
