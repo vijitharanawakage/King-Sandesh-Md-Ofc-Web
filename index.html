@@ -198,15 +198,14 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
     
     <section id="comments" style="padding: 80px 20px; background-color: #0f0f0f; color: #0ff;">
   <h2 style="text-align:center; font-size: 28px;">💬 Leave a Comment</h2>
-  
   <form id="commentForm" style="margin: 20px auto; max-width: 500px;">
-    <input type="text" id="name" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;">
-    <textarea id="message" placeholder="Your Comment" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;"></textarea>
+    <input type="text" id="commenterName" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;">
+    <textarea id="commentText" placeholder="Your Comment" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;"></textarea>
     <button type="submit" style="padding: 10px 20px; background-color: #0ff; color: #000; border: none; cursor: pointer;">Post Comment</button>
   </form>
-
   <div id="commentsList" style="max-width: 600px; margin: auto;"></div>
 </section>
+
 
 </section> 
 <!-- About Us Section -->
@@ -282,37 +281,36 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
-const form = document.getElementById('commentForm');
-  const commentsList = document.getElementById('commentsList');
+  const form = document.getElementById('commentForm');
+  const list = document.getElementById('commentsList');
 
   function loadComments() {
     const comments = JSON.parse(localStorage.getItem('comments')) || [];
-    commentsList.innerHTML = '';
-    comments.forEach((comment, index) => {
+    list.innerHTML = '';
+    comments.forEach(c => {
       const div = document.createElement('div');
-      div.style = "margin-bottom: 15px; border: 1px solid #0ff; padding: 10px; background-color: #111;";
-      div.innerHTML = `<strong style="color:#0ff;">${comment.name}</strong><br><span>${comment.message}</span>`;
-      commentsList.appendChild(div);
+      div.style = "margin-bottom:15px;border:1px solid #0ff;padding:10px;background:#111;";
+      div.innerHTML = `<strong style="color:#0ff;">${c.name}</strong><br><span>${c.message}</span>`;
+      list.appendChild(div);
     });
   }
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const message = document.getElementById('message').value.trim();
+  form.addEventListener('submit', e => {
+    e.preventDefault(); // Stop form from reloading :contentReference[oaicite:1]{index=1}
+
+    const name = document.getElementById('commenterName').value.trim();
+    const message = document.getElementById('commentText').value.trim();
     if (!name || !message) return;
 
-    const comment = { name, message };
     const comments = JSON.parse(localStorage.getItem('comments')) || [];
-    comments.push(comment);
+    comments.push({ name, message });
     localStorage.setItem('comments', JSON.stringify(comments));
 
-    form.reset();
     loadComments();
+    form.reset();
   });
 
-  // Load comments on page load
-  window.addEventListener('DOMContentLoaded', loadComments);
+  :contentReference[oaicite:2]{index=2}
 
 // Loading animation hide
 window.addEventListener('load', () => {
