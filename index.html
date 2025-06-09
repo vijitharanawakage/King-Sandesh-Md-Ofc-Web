@@ -196,12 +196,41 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <button type="submit">Send Message</button>  
     </form>  
     
-    <form id="commentForm">
-  <input name="commenterName" required placeholder="Name"/>
-  <textarea name="commentText" required placeholder="Comment"></textarea>
-  <button type="submit">Post Comment</button>
-</form>
-<div id="commentsList"></div>
+    <section id="commentsSection" style="
+  max-width:800px;
+  margin:40px auto;
+  padding:20px;
+  background:#1a1a1a;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+  color:#eee;
+">
+  <h2 style="color:#0ff; margin-bottom:10px;">💬 Comments</h2>
+  <form id="commentForm" style="
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:20px;
+  ">
+    <input name="commenterName" placeholder="Your Name" required
+      style="padding:10px; border:none; border-radius:5px;"
+    />
+    <textarea name="commentText" placeholder="Your Comment" required rows="3"
+      style="padding:10px; border:none; border-radius:5px;"
+    ></textarea>
+    <button type="submit" style="
+      align-self:flex-end;
+      padding:10px 20px;
+      background:#0ff;
+      color:#000;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+    ">Post Comment</button>
+  </form>
+  <div id="commentsList" style="display:flex; flex-direction:column; gap:15px;"></div>
+</section>
+
 
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
