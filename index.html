@@ -197,70 +197,83 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
     </form>  
     
     <section id="commentsSection" style="
-  max-width:800px;
-  margin:40px auto;
-  padding:20px;
-  border-radius:10px;
-  background: linear-gradient(45deg, #222, #333, #222);
-  background-size: 400% 400%;
-  animation: gradientBG 12s ease infinite, fadeIn 1s ease;
-  box-shadow:0 4px 12px rgba(0,0,0,0.5);
-  color:#eee;
+  position: relative;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  background: rgba(30, 30, 40, 0.5);
 ">
-  <h2 style="color:#0ff; margin-bottom:10px; animation: fadeIn 1.2s ease;">💬 Comments</h2>
-  <form id="commentForm" style="
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin-bottom:20px;
-    animation: fadeIn 1.4s ease;
-  ">
-    <input name="commenterName" placeholder="Your Name" required
-      style="padding:10px; border:none; border-radius:5px;"
-    />
-    <textarea name="commentText" placeholder="Your Comment" required rows="3"
-      style="padding:10px; border:none; border-radius:5px;"
-    ></textarea>
-    <button type="submit" style="
-      align-self:flex-end;
-      padding:10px 20px;
-      background:#0ff;
-      color:#000;
-      border:none;
-      border-radius:5px;
-      cursor:pointer;
-      animation: fadeIn 1.6s ease;
-    ">Post Comment</button>
-  </form>
-  <div id="commentsList" style="
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    animation: fadeIn 1.8s ease;
+  <!-- Video background -->
+  <video autoplay muted loop playsinline
+    style="
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 120%; height: auto;
+      min-height: 120%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: 1;
+    ">
+    <source src="https://files.catbox.moe/b5se6o.mp4" type="video/mp4">
+    Your browser doesn't support HTML5 video.
+  </video>
+
+  <!-- Overlay for better readability -->
+  <div style="
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 2;
   "></div>
+
+  <!-- Comments UI -->
+  <div style="position: relative; z-index: 3; color: #ddd;">
+    <h2 style="margin-bottom:20px; color:#40e0d0;">💬 Live Comments</h2>
+    <form id="commentForm" style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <input name="commenterName" placeholder="Your Name" required
+             style="padding:10px; border:none; border-radius:6px; background:#2e2e3c; color:#ddd;" />
+      <textarea name="commentText" placeholder="Your Comment" required rows="3"
+                style="padding:10px; border:none; border-radius:6px; background:#2e2e3c; color:#ddd;"></textarea>
+      <button type="submit"
+              style="align-self:flex-end; padding:10px 24px; background:#40e0d0; color:#1e1e2a; font-weight:bold;
+                     border:none; border-radius:6px; cursor:pointer; transition: background 0.3s;"
+              onmouseover="this.style.background='#32cfc5'"
+              onmouseout="this.style.background='#40e0d0'">
+        Post
+      </button>
+    </form>
+    <div id="commentsList" style="display:flex; flex-direction:column; gap:16px;"></div>
+  </div>
+
+  <style>
+    .comment-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 14px 18px;
+      border-radius: 8px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeSlideIn 0.5s forwards ease-out;
+    }
+    @keyframes fadeSlideIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .comment-card strong {
+      color: #40e0d0;
+      font-weight: 500;
+    }
+    .comment-time {
+      font-size: 0.8em;
+      color: #aaa;
+      position: absolute;
+      top: 10px; right: 14px;
+    }
+  </style>
 </section>
 
-<style>
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Individual comment card animation */
-  .comment-card {
-    background: rgba(0,0,0,0.3);
-    padding:12px;
-    border-radius:5px;
-    position:relative;
-    animation: fadeIn 0.5s ease;
-  }
-</style>
 
 
 
