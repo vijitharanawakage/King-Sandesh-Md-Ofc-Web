@@ -196,30 +196,19 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <button type="submit">Send Message</button>  
     </form>  
     
-    <section id="comments" style="padding:80px 20px; background-color:#0f0f0f; color:#0ff;">
-  <h2 style="text-align:center; font-size:28px;">💬 Leave a Comment</h2>
-  <form id="commentForm" style="margin:20px auto; max-width:500px;">
-    <input type="text" id="commenterName" placeholder="Your Name" required
-           style="width:100%; padding:10px; margin-bottom:10px; background:#111; border:1px solid #0ff; color:#0ff;">
-    <textarea id="commentText" placeholder="Your Comment" required
-              style="width:100%; padding:10px; margin-bottom:10px; background:#111; border:1px solid #0ff; color:#0ff;"></textarea>
-    <button type="submit" style="padding:10px 20px; background-color:#0ff; color:#000; border:none; cursor:pointer;">
-      Post Comment
-    </button>
-  </form>
-  <div id="commentsList" style="max-width:600px; margin:auto;"></div>
-</section>
-<!-- ✅ Include Firebase SDK before your comment form or at end of body -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+    <form id="commentForm">
+  <input name="commenterName" required placeholder="Name"/>
+  <textarea name="commentText" required placeholder="Comment"></textarea>
+  <button type="submit">Post Comment</button>
+</form>
+<div id="commentsList"></div>
 
-<script>
-  // 🔧 Initialize Firebase with your real-time DB URL
-  const firebaseConfig = {
-    databaseURL: "https://ksmd-comment-default-rtdb.asia-southeast1.firebasedatabase.app/"
-  };
-  const app = firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+  import { getDatabase, ref, push, onValue } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+
+  const app = initializeApp({ databaseURL: "https://ksmd-comment-default-rtdb.asia-southeast1.firebasedatabase.app/" });
+  const db = getDatabase(app);
 
   const form = document.getElementById('commentForm');
   const list = document.getElementById('commentsList');
@@ -229,24 +218,22 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
     const name = form.commenterName.value.trim();
     const msg = form.commentText.value.trim();
     if (!name || !msg) return;
-    // push comment to Firebase
-    db.ref('comments').push({ name, message: msg, timestamp: Date.now() });
-    form.reset();
+
+    push(ref(db, 'comments'), { name, message: msg, timestamp: Date.now() })
+      .then(() => form.reset())
+      .catch(console.error);
   });
 
-  // real-time listener: updates for all viewers
-  db.ref('comments').on('value', snapshot => {
+  onValue(ref(db, 'comments'), snapshot => {
+    const data = snapshot.val() || {};
     list.innerHTML = '';
-    snapshot.forEach(child => {
-      const data = child.val();
-      const div = document.createElement('div');
-      div.style = "margin-bottom:15px;padding:10px;background:#222;color:#0ff;border-radius:5px;";
-      div.innerHTML = `<strong>${data.name}</strong>: ${data.message}`;
-      list.appendChild(div);
+    Object.values(data).forEach(({ name, message }) => {
+      const el = document.createElement('div');
+      el.textContent = `${name}: ${message}`;
+      list.appendChild(el);
     });
   });
 </script>
-</body>       
 
 <section id="musicPlayer" style="padding:40px; text-align:center; background:#111; color:#0ff;">
   <h2>🎧 Music Player</h2>
