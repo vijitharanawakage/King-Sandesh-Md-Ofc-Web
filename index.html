@@ -103,34 +103,6 @@ font-size: 20px;
 margin: 0 10px;
 }
 
-
-  body.light .comment-section {
-    background: #fff;
-    color: #000;
-  }
-
-  body.dark .comment-section {
-    background: #1e1e1e;
-    color: #f1f1f1;
-  }
-
-  .comment-item {
-    margin: 10px 0;
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
-  }
-
-  .replies {
-    margin-left: 20px;
-    list-style-type: circle;
-  }
-
-  .theme-toggle {
-    margin: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-
 .team-member {
 width: 100%;
 max-width: 300px;
@@ -222,7 +194,7 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <input type="email" id="email" placeholder="Your Email Address" required>  
         <textarea id="message" placeholder="Your Message" rows="5" required></textarea>  
         <button type="submit">Send Message</button>  
-     </form>  
+    </form>  
     
     <section id="comments" style="padding:80px 20px; background-color:#0f0f0f; color:#0ff;">
   <h2 style="text-align:center; font-size:28px;">💬 Leave a Comment</h2>
@@ -234,111 +206,60 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
     <button type="submit" style="padding:10px 20px; background-color:#0ff; color:#000; border:none; cursor:pointer;">
       Post Comment
     </button>
-    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
   </form>
   <div id="commentsList" style="max-width:600px; margin:auto;"></div>
 </section>
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('commentForm');
+    const list = document.getElementById('commentsList');
 
-<script>
-  function toggleTheme() {
-    const currentTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
-    document.body.className = currentTheme;
-    localStorage.setItem('theme', currentTheme);
-  }
-
-  // Load theme from localStorage
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  document.body.className = savedTheme;
-  const commentForm = document.getElementById('comment-form');
-  const nameInput = document.getElementById('name');
-  const commentInput = document.getElementById('comment');
-  const commentList = document.getElementById('comment-list');
-
-  let editingIndex = null;
-
-  function loadComments() {
-    const comments = JSON.parse(localStorage.getItem('comments') || '[]');
-    commentList.innerHTML = '';
-
-    comments.forEach((item, index) => {
-      const li = document.createElement('li');
-      li.classList.add('comment-item');
-
-      li.innerHTML = `
-        <div><strong>${item.name}</strong>: ${item.comment}</div>
-        <button onclick="editComment(${index})">Edit</button>
-        <button onclick="deleteComment(${index})">Delete</button>
-        <button onclick="replyComment(${index})">Reply</button>
-        <ul id="replies-${index}" class="replies"></ul>
-      `;
-
-      if (item.replies && item.replies.length > 0) {
-        const repliesList = li.querySelector(`#replies-${index}`);
-        item.replies.forEach((reply) => {
-          const replyLi = document.createElement('li');
-          replyLi.textContent = `${reply.name}: ${reply.comment}`;
-          repliesList.appendChild(replyLi);
-        });
-      }
-
-      commentList.appendChild(li);
-    });
-  }
-
-  function saveComments(comments) {
-    localStorage.setItem('comments', JSON.stringify(comments));
-  }
-
-  commentForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = nameInput.value.trim();
-    const comment = commentInput.value.trim();
-
-    if (!name || !comment) return;
-
-    let comments = JSON.parse(localStorage.getItem('comments') || '[]');
-
-    if (editingIndex !== null) {
-      comments[editingIndex].name = name;
-      comments[editingIndex].comment = comment;
-      editingIndex = null;
-    } else {
-      comments.push({ name, comment, replies: [] });
+    function renderComments(arr) {
+      list.innerHTML = '';
+      arr.forEach((c, i) => {
+        const div = document.createElement('div');
+        div.style = "margin-bottom:15px;border:1px solid #0ff;padding:10px;background:#111;position:relative;";
+        div.innerHTML = `
+          <strong style="color:#0ff;">${c.name}</strong><br>
+          <span>${c.message}</span>
+          <button data-index="${i}" class="delete-btn"
+            style="position:absolute; top:10px; right:10px; background:#f00; border:none; color:#fff; padding:5px 10px; cursor:pointer;">
+            Delete
+          </button>`;
+        list.appendChild(div);
+      });
     }
 
-    saveComments(comments);
-    commentForm.reset();
+    function loadComments() {
+      const arr = JSON.parse(localStorage.getItem('comments')) || [];
+      renderComments(arr);
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('commenterName').value.trim();
+      const message = document.getElementById('commentText').value.trim();
+      if (!name || !message) return;
+      const arr = JSON.parse(localStorage.getItem('comments')) || [];
+      arr.push({ name, message });
+      localStorage.setItem('comments', JSON.stringify(arr));
+      renderComments(arr);
+      form.reset();
+    });
+
+    list.addEventListener('click', e => {
+      if (e.target.matches('.delete-btn')) {
+        const index = Number(e.target.getAttribute('data-index'));
+        const arr = JSON.parse(localStorage.getItem('comments')) || [];
+        arr.splice(index, 1); // remove selected comment
+        localStorage.setItem('comments', JSON.stringify(arr));
+        renderComments(arr);
+      }
+    });
+
     loadComments();
+    console.log('Comment + delete system ready ✅');
   });
-
-  function deleteComment(index) {
-    const comments = JSON.parse(localStorage.getItem('comments') || '[]');
-    comments.splice(index, 1);
-    saveComments(comments);
-    loadComments();
-  }
-
-  function editComment(index) {
-    const comments = JSON.parse(localStorage.getItem('comments') || '[]');
-    nameInput.value = comments[index].name;
-    commentInput.value = comments[index].comment;
-    editingIndex = index;
-  }
-
-  function replyComment(index) {
-    const name = prompt('Your name:');
-    const comment = prompt('Your reply:');
-
-    if (!name || !comment) return;
-
-    const comments = JSON.parse(localStorage.getItem('comments') || '[]');
-    comments[index].replies.push({ name, comment });
-    saveComments(comments);
-    loadComments();
-  }
-
-  loadComments();
 </script>
 
 </section> 
