@@ -196,71 +196,16 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <button type="submit">Send Message</button>  
     </form>  
     
-    <section id="comments" style="padding:80px 20px; background-color:#0f0f0f; color:#0ff;">
-  <h2 style="text-align:center; font-size:28px;">💬 Leave a Comment</h2>
-  <form id="commentForm" style="margin:20px auto; max-width:500px;">
-    <input type="text" id="commenterName" placeholder="Your Name" required
-           style="width:100%; padding:10px; margin-bottom:10px; background:#111; border:1px solid #0ff; color:#0ff;">
-    <textarea id="commentText" placeholder="Your Comment" required
-              style="width:100%; padding:10px; margin-bottom:10px; background:#111; border:1px solid #0ff; color:#0ff;"></textarea>
-    <button type="submit" style="padding:10px 20px; background-color:#0ff; color:#000; border:none; cursor:pointer;">
-      Post Comment
-    </button>
-  </form>
-  <div id="commentsList" style="max-width:600px; margin:auto;"></div>
-</section>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('commentForm');
-    const list = document.getElementById('commentsList');
-
-    function renderComments(arr) {
-      list.innerHTML = '';
-      arr.forEach((c, i) => {
-        const div = document.createElement('div');
-        div.style = "margin-bottom:15px;border:1px solid #0ff;padding:10px;background:#111;position:relative;";
-        div.innerHTML = `
-          <strong style="color:#0ff;">${c.name}</strong><br>
-          <span>${c.message}</span>
-          <button data-index="${i}" class="delete-btn"
-            style="position:absolute; top:10px; right:10px; background:#f00; border:none; color:#fff; padding:5px 10px; cursor:pointer;">
-            Delete
-          </button>`;
-        list.appendChild(div);
-      });
-    }
-
-    function loadComments() {
-      const arr = JSON.parse(localStorage.getItem('comments')) || [];
-      renderComments(arr);
-    }
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const name = document.getElementById('commenterName').value.trim();
-      const message = document.getElementById('commentText').value.trim();
-      if (!name || !message) return;
-      const arr = JSON.parse(localStorage.getItem('comments')) || [];
-      arr.push({ name, message });
-      localStorage.setItem('comments', JSON.stringify(arr));
-      renderComments(arr);
-      form.reset();
-    });
-
-    list.addEventListener('click', e => {
-      if (e.target.matches('.delete-btn')) {
-        const index = Number(e.target.getAttribute('data-index'));
-        const arr = JSON.parse(localStorage.getItem('comments')) || [];
-        arr.splice(index, 1); // remove selected comment
-        localStorage.setItem('comments', JSON.stringify(arr));
-        renderComments(arr);
-      }
-    });
-
-    loadComments();
-    console.log('Comment + delete system ready ✅');
-  });
-</script>
+    <div class="comment-section fade-in">
+    <h2>Leave a Comment</h2>
+    <form id="commentForm">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <textarea name="message" rows="4" placeholder="Your Comment" required></textarea>
+      <button type="submit">Post Comment</button>
+    </form>
+    <div id="commentsList"></div>
+    <button id="seeMoreBtn" class="see-more">See More</button>
+  </div>
 
 <section id="musicPlayer" style="padding:40px; text-align:center; background:#111; color:#0ff;">
   <h2>🎧 Music Player</h2>
@@ -444,6 +389,92 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   } else {
     alert('Please fill in all fields.');
   }
-});</script></body>
+});
+
+// Show bot deploy count
+    fetch('/api/botcount')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('botCount').textContent = data.count || 0;
+      }).catch(() => {
+        document.getElementById('botCount').textContent = 'N/A';
+      });
+
+    const commentForm = document.getElementById('commentForm');
+    const commentsList = document.getElementById('commentsList');
+    const seeMoreBtn = document.getElementById('seeMoreBtn');
+
+    const forbiddenWords = ['fuck', 'lesbian', 'xxx', 'https', 'wa.me', 'අම්මා', 'අම්ම', 'amma', 'තාත්ත', 'තාත්තා', 'thaththa', 'huth', 'පොන්න'];
+    let allComments = [];
+    let visibleCount = 5;
+
+    function filterComments(comments) {
+      return comments.filter(c => {
+        const msg = c.message.toLowerCase();
+        return msg.length <= 200 &&
+          !forbiddenWords.some(word => msg.includes(word));
+      });
+    }
+
+    function renderComments() {
+      commentsList.innerHTML = '';
+      const visible = allComments.slice(0, visibleCount);
+      visible.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comment';
+        div.innerHTML = `<strong>${c.name}</strong><br/>${c.message}`;
+        commentsList.appendChild(div);
+      });
+
+      if (visibleCount >= allComments.length) {
+        seeMoreBtn.style.display = 'none';
+      } else {
+        seeMoreBtn.style.display = 'block';
+      }
+    }
+
+    function loadComments() {
+      fetch('/api/comment')
+        .then(res => res.json())
+        .then(data => {
+          allComments = filterComments(data);
+          renderComments();
+        })
+        .catch(err => {
+          commentsList.innerHTML = '<p style="color: red;">Failed to load comments.</p>';
+        });
+    }
+
+    commentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(commentForm);
+      const data = {
+        name: formData.get('name'),
+        message: formData.get('message')
+      };
+
+      fetch('/api/comment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          commentForm.reset();
+          loadComments();
+        } else {
+          alert(result.error || 'Failed to post comment.');
+        }
+      })
+      .catch(() => alert('Failed to post comment.'));
+    });
+
+    seeMoreBtn.addEventListener('click', () => {
+      visibleCount += 5;
+      renderComments();
+    });
+
+    loadComments();</script></body>
 
     </html>
