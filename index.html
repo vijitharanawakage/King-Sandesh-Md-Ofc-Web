@@ -195,23 +195,18 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <textarea id="message" placeholder="Your Message" rows="5" required></textarea>  
         <button type="submit">Send Message</button>  
     </form>  
-
-<body><!-- Comment Section Container -->
-<div id="comment-section" style="max-width:600px; margin:20px auto; font-family: Arial, sans-serif;">
-  <h3>Comments</h3></body>
+    
+    <section id="comments" style="padding: 80px 20px; background-color: #0f0f0f; color: #0ff;">
+  <h2 style="text-align:center; font-size: 28px;">💬 Leave a Comment</h2>
   
-  <body><!-- Comment List -->
-  <div id="comments-list" style="border: 1px solid #ccc; padding: 10px; min-height: 100px; max-height: 300px; overflow-y: auto; margin-bottom: 15px;">
-    <!-- Comments will appear here -->
-  </div></body>
-
-  <body><!-- Comment Form -->
-  <form id="comment-form" style="display: flex; flex-direction: column; gap: 10px;">
-    <input type="text" id="username" placeholder="Your name" required style="padding: 8px; font-size: 16px;">
-    <textarea id="comment" rows="4" placeholder="Write a comment..." required style="padding: 8px; font-size: 16px;"></textarea>
-    <button type="submit" style="padding: 10px; background-color: #007BFF; color: white; border: none; font-size: 16px; cursor: pointer;">Submit Comment</button>
+  <form id="commentForm" style="margin: 20px auto; max-width: 500px;">
+    <input type="text" id="name" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;">
+    <textarea id="message" placeholder="Your Comment" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;"></textarea>
+    <button type="submit" style="padding: 10px 20px; background-color: #0ff; color: #000; border: none; cursor: pointer;">Post Comment</button>
   </form>
-</div></body>
+
+  <div id="commentsList" style="max-width: 600px; margin: auto;"></div>
+</section>
 
 </section> 
 <!-- About Us Section -->
@@ -244,7 +239,7 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 </style>
 
 <script>
-  const text = `𝚃𝙷𝙴 𝙺𝙸𝙽𝙶 𝚂𝙰𝙽𝙳𝙴𝚂𝙷 𝙼𝚄𝙻𝚃𝙸 𝙳𝙴𝚅𝙸𝙲𝙴 𝙸𝚂 𝚃𝙷𝙴 𝙱𝙴𝚂𝚃 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃 𝙸𝚂 𝙲𝚁𝙴𝙰𝚃𝙴𝙳 𝙱𝚈 𝙿𝚁𝙾𝙵𝙴𝚂𝚂𝙾𝚁 𝚂𝙰𝙽𝙳𝙴𝚂𝙷 𝙱𝙷𝙰𝚂𝙷𝙰𝙽𝙰👊.𝚃𝙷𝙸𝚂 𝙸𝚂 24𝙷 𝙾𝙽𝙻𝙸𝙽𝙴 𝚆𝙾𝚁𝙺𝙸𝙽𝙶 𝙿𝚁𝙾𝙶𝚁𝙰𝙼𝙼𝙴🙈.𝚈𝙾𝚄 𝙲𝙰𝙽 𝙳𝙴𝙿𝙻𝙾𝚈𝙴𝙳 𝙸𝚃 𝙵𝚁𝙾𝙼 𝙶𝙸𝚃𝙷𝚄𝙱 𝙰𝙽𝙳 𝙳𝙸𝚁𝙴𝙲𝚃 𝙼𝙰𝚂𝚂𝙰𝙶𝙴 𝙵𝙾𝚁 𝙼𝙴 𝙸𝙽 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿💙.𝚃𝙷𝙸𝚂 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃 𝙸𝚂 𝙲𝚁𝙴𝙰𝚃𝙴𝙳 𝙸𝙽 2025.𝚃𝙷𝙸𝚂 𝙿𝚁𝙾𝙹𝙴𝙲𝚃 𝙸𝚂 𝚁𝙴𝙿𝚁𝙴𝚂𝙴𝙽𝚃 𝙱𝚈 𝘿𝘼𝙍𝙆 𝘿𝙍𝘼𝙂𝙊𝙉 𝙁𝘼𝙈𝙄𝙇𝙔 𝙊𝙁𝘾🗿.𝐆𝐑𝐀𝐘 𝐖𝐎𝐋𝐅 𝐀𝐍𝐃 𝐌𝐑 𝐔𝐍𝐊𝐍𝐎𝐖𝐍 𝙰𝚁𝙴 𝙾𝚆𝙽𝙴𝚁 𝙾𝙵 𝚃𝙷𝙸𝚂🤒.`;
+  const text = `𝚃𝙷𝙴 𝙺𝙸𝙽𝙶 𝚂𝙰𝙽𝙳𝙴𝚂𝙷 𝙼𝚄𝙻𝚃𝙸 𝙳𝙴𝚅𝙸𝙲𝙴 𝙸𝚂 𝚃𝙷𝙴 𝙱𝙴𝚂𝚃 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃 𝙲𝚁𝙴𝙰𝚃𝙴𝙳 𝙱𝚈 𝙿𝚁𝙾𝙵𝙴𝚂𝚂𝙾𝚁 𝚂𝙰𝙽𝙳𝙴𝚂𝙷 𝙱𝙷𝙰𝚂𝙷𝙰𝙽𝙰👊.𝚃𝙷𝙸𝚂 𝙸𝚂 24𝙷 𝙾𝙽𝙻𝙸𝙽𝙴 𝚆𝙾𝚁𝙺𝙸𝙽𝙶 𝙿𝚁𝙾𝙶𝚁𝙰𝙼𝙼𝙴🙈.𝚈𝙾𝚄 𝙲𝙰𝙽 𝙳𝙴𝙿𝙻𝙾𝚈𝙴𝙳 𝙸𝚃 𝙵𝚁𝙾𝙼 𝙶𝙸𝚃𝙷𝚄𝙱 𝙰𝙽𝙳 𝙳𝙸𝚁𝙴𝙲𝚃 𝙼𝙰𝚂𝚂𝙰𝙶𝙴 𝙵𝙾𝚁 𝙼𝙴 𝙸𝙽 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿💙.𝚃𝙷𝙸𝚂 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿 𝙱𝙾𝚃 𝙸𝚂 𝙲𝚁𝙴𝙰𝚃𝙴𝙳 𝙸𝙽 2025.𝚃𝙷𝙸𝚂 𝙿𝚁𝙾𝙹𝙴𝙲𝚃 𝙸𝚂 𝚁𝙴𝙿𝚁𝙴𝚂𝙴𝙽𝚃 𝙱𝚈 𝘿𝘼𝙍𝙆 𝘿𝙍𝘼𝙂𝙊𝙉 𝙁𝘼𝙈𝙄𝙇𝙔 𝙊𝙁𝘾🗿.𝐆𝐑𝐀𝐘 𝐖𝐎𝐋𝐅 𝐀𝐍𝐃 𝐌𝐑 𝐔𝐍𝐊𝐍𝐎𝐖𝐍 𝙰𝚁𝙴 𝙾𝚆𝙽𝙴𝚁 𝙾𝙵 𝚃𝙷𝙸𝚂🤒.`;
 
   const target = document.querySelector('.typewriter-text');
   let index = 0;
@@ -287,6 +282,37 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
+const form = document.getElementById('commentForm');
+  const commentsList = document.getElementById('commentsList');
+
+  function loadComments() {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    commentsList.innerHTML = '';
+    comments.forEach((comment, index) => {
+      const div = document.createElement('div');
+      div.style = "margin-bottom: 15px; border: 1px solid #0ff; padding: 10px; background-color: #111;";
+      div.innerHTML = `<strong style="color:#0ff;">${comment.name}</strong><br><span>${comment.message}</span>`;
+      commentsList.appendChild(div);
+    });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!name || !message) return;
+
+    const comment = { name, message };
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.push(comment);
+    localStorage.setItem('comments', JSON.stringify(comments));
+
+    form.reset();
+    loadComments();
+  });
+
+  // Load comments on page load
+  window.addEventListener('DOMContentLoaded', loadComments);
 
 // Loading animation hide
 window.addEventListener('load', () => {
@@ -339,46 +365,6 @@ particlesJS("particles-js", {
   },
   retina_detect: true
 });
-
-// Get elements
-  const form = document.getElementById('comment-form');
-  const commentsList = document.getElementById('comments-list');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value.trim();
-    const comment = document.getElementById('comment').value.trim();
-
-    if(username && comment){
-      // Create comment div
-      const commentDiv = document.createElement('div');
-      commentDiv.style.borderBottom = '1px solid #ddd';
-      commentDiv.style.padding = '8px 0';
-
-      // Comment username and text
-      commentDiv.innerHTML = `
-        <strong>${sanitize(username)}</strong> <br>
-        <p>${sanitize(comment)}</p>
-      `;
-
-      // Add new comment to list
-      commentsList.appendChild(commentDiv);
-
-      // Clear form
-      form.reset();
-
-      // Scroll to latest comment
-      commentsList.scrollTop = commentsList.scrollHeight;
-    }
-  });
-
-  // Simple sanitize function to avoid HTML injection
-  function sanitize(str) {
-    const temp = document.createElement('div');
-    temp.textContent = str;
-    return temp.innerHTML;
-    }
 
 // WhatsApp Form Submission
 document.getElementById('contact-form').addEventListener('submit', function(e) {
