@@ -196,16 +196,47 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <button type="submit">Send Message</button>  
     </form>  
     
-    </section>  <!-- Comment Section -->  <section class="comments" id="comments">
+    <section id="comments" style="padding: 80px 20px; background-color: #0f0f0f; color: #0ff;">
   <h2 style="text-align:center; font-size: 28px;">💬 Leave a Comment</h2>
-    <form id="commentForm" style="margin: 20px auto; max-width: 500px;">
-        <input type="text" id="commenterName" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;">
-        <textarea id="commentText" placeholder="Your Comment" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;"></textarea>
+  <form id="commentForm" style="margin: 20px auto; max-width: 500px;">
+    <input type="text" id="commenterName" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;">
+    <textarea id="commentText" placeholder="Your Comment" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #0ff; color: #0ff;"></textarea>
     <button type="submit" style="padding: 10px 20px; background-color: #0ff; color: #000; border: none; cursor: pointer;">Post Comment</button>
   </form>
-  
   <div id="commentsList" style="max-width: 600px; margin: auto;"></div>
 </section>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('commentForm');
+    const list = document.getElementById('commentsList');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault(); // stop reload
+      const name = document.getElementById('commenterName').value.trim();
+      const text = document.getElementById('commentText').value.trim();
+      if (!name || !text) return;
+      const arr = JSON.parse(localStorage.getItem('comments')) || [];
+      arr.push({ name, message: text });
+      localStorage.setItem('comments', JSON.stringify(arr));
+      updateComments(arr);
+      form.reset();
+    });
+
+    function updateComments(arr) {
+      list.innerHTML = '';
+      arr.forEach(c => {
+        const d = document.createElement('div');
+        d.style = "margin-bottom:15px;border:1px solid #0ff;padding:10px;background:#111;";
+        d.innerHTML = `<strong style="color:#0ff;">${c.name}</strong><br><span>${c.message}</span>`;
+        list.appendChild(d);
+      });
+    }
+
+    updateComments(JSON.parse(localStorage.getItem('comments')) || []);
+    console.log('Comment system ready ✅');
+  });
+</script>
+</body>
 
 
 </section> 
@@ -282,37 +313,6 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
-  const form = document.getElementById('commentForm');
-  const list = document.getElementById('commentsList');
-
-  function loadComments() {
-    const comments = JSON.parse(localStorage.getItem('comments')) || [];
-    list.innerHTML = '';
-    comments.forEach(c => {
-      const div = document.createElement('div');
-      div.style = "margin-bottom:15px;border:1px solid #0ff;padding:10px;background:#111;";
-      div.innerHTML = `<strong style="color:#0ff;">${c.name}</strong><br><span>${c.message}</span>`;
-      list.appendChild(div);
-    });
-  }
-
-  form.addEventListener('submit', e => {
-    e.preventDefault(); // Stop form from reloading :contentReference[oaicite:1]{index=1}
-
-    const name = document.getElementById('commenterName').value.trim();
-    const message = document.getElementById('commentText').value.trim();
-    if (!name || !message) return;
-
-    const comments = JSON.parse(localStorage.getItem('comments')) || [];
-    comments.push({ name, message });
-    localStorage.setItem('comments', JSON.stringify(comments));
-
-    loadComments();
-    form.reset();
-  });
-
-  :contentReference[oaicite:2]{index=2}
-
 // Loading animation hide
 window.addEventListener('load', () => {
   setTimeout(() => {
