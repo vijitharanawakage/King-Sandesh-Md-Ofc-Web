@@ -196,118 +196,27 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <button type="submit">Send Message</button>  
     </form>  
     
-    <section id="commentsSection" style="
-  position: relative;
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  background: rgba(30, 30, 40, 0.5);
-">
-  <!-- Video background -->
-  <video autoplay muted loop playsinline
-    style="
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 120%; height: auto;
-      min-height: 120%;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      z-index: 1;
-    ">
-    <source src="https://files.catbox.moe/b5se6o.mp4" type="video/mp4">
-    Your browser doesn't support HTML5 video.
-  </video>
+    <div class="comment-section">
+  <h2>Leave a Comment</h2>
+  <form id="commentForm">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <textarea name="message" rows="3" placeholder="Your Comment" required></textarea>
+    <button type="submit">Post Comment</button>
+  </form>
 
-  <!-- Overlay for better readability -->
-  <div style="
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 2;
-  "></div>
-
-  <!-- Comments UI -->
-  <div style="position: relative; z-index: 3; color: #ddd;">
-    <h2 style="margin-bottom:20px; color:#40e0d0;">💬 Live Comments</h2>
-    <form id="commentForm" style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
-      <input name="commenterName" placeholder="Your Name" required
-             style="padding:10px; border:none; border-radius:6px; background:#2e2e3c; color:#ddd;" />
-      <textarea name="commentText" placeholder="Your Comment" required rows="3"
-                style="padding:10px; border:none; border-radius:6px; background:#2e2e3c; color:#ddd;"></textarea>
-      <button type="submit"
-              style="align-self:flex-end; padding:10px 24px; background:#40e0d0; color:#1e1e2a; font-weight:bold;
-                     border:none; border-radius:6px; cursor:pointer; transition: background 0.3s;"
-              onmouseover="this.style.background='#32cfc5'"
-              onmouseout="this.style.background='#40e0d0'">
-        Post
-      </button>
-    </form>
-    <div id="commentsList" style="display:flex; flex-direction:column; gap:16px;"></div>
+  <div style="margin-top:10px">
+    <select id="sortSelect">
+      <option value="newest">Newest</option>
+      <option value="oldest">Oldest</option>
+      <option value="mostLiked">Most Liked</option>
+    </select>
+    
   </div>
 
-  <style>
-    .comment-card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 14px 18px;
-      border-radius: 8px;
-      position: relative;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeSlideIn 0.5s forwards ease-out;
-    }
-    @keyframes fadeSlideIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .comment-card strong {
-      color: #40e0d0;
-      font-weight: 500;
-    }
-    .comment-time {
-      font-size: 0.8em;
-      color: #aaa;
-      position: absolute;
-      top: 10px; right: 14px;
-    }
-  </style>
-</section>
-
-
-
-
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
-  import { getDatabase, ref, push, onValue } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
-
-  const app = initializeApp({ databaseURL: "https://ksmd-comment-default-rtdb.asia-southeast1.firebasedatabase.app/" });
-  const db = getDatabase(app);
-
-  const form = document.getElementById('commentForm');
-  const list = document.getElementById('commentsList');
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const name = form.commenterName.value.trim();
-    const msg = form.commentText.value.trim();
-    if (!name || !msg) return;
-
-    push(ref(db, 'comments'), { name, message: msg, timestamp: Date.now() })
-      .then(() => form.reset())
-      .catch(console.error);
-  });
-
-  onValue(ref(db, 'comments'), snapshot => {
-    const data = snapshot.val() || {};
-    list.innerHTML = '';
-    Object.values(data).forEach(({ name, message }) => {
-      const el = document.createElement('div');
-      el.textContent = `${name}: ${message}`;
-      list.appendChild(el);
-    });
-  });
-</script>
+  <hr />
+  <div id="commentsList"></div>
+  <button id="seeMoreBtn">See More</button>
+</div>
 
 <section id="musicPlayer" style="padding:40px; text-align:center; background:#111; color:#0ff;">
   <h2>🎧 Music Player</h2>
@@ -491,6 +400,185 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   } else {
     alert('Please fill in all fields.');
   }
-});</script></body>
+});
 
-      </html>
+<script>
+  // Count-up animation function
+  function animateCountUp(el, target, duration) {
+    let start = 0;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const currentValue = Math.floor(progress * target);
+
+      el.textContent = currentValue.toLocaleString(); // Optional: adds comma separators
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        el.textContent = target.toLocaleString(); // Ensure final value is accurate
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  // Fetch the count and animate
+  fetch('/api/botcount')
+    .then(res => res.json())
+    .then(data => {
+      const count = Number(data.count) || 0;
+      const countElement = document.getElementById('botCount');
+      animateCountUp(countElement, count, 2000); // 2000ms = 2 seconds
+    })
+    .catch(() => {
+      document.getElementById('botCount').textContent = 'N/A';
+    });
+
+const commentForm = document.getElementById('commentForm');
+const commentsList = document.getElementById('commentsList');
+const seeMoreBtn = document.getElementById('seeMoreBtn');
+const sortSelect = document.getElementById('sortSelect');
+
+let allComments = [];
+let visibleCount = 5;
+
+const forbiddenWords = ['fuck', 'lesbian', 'xxx', 'https', 'wa.me', 'අම්මා', 'අම්ම', 'amma', 'තාත්තා', 'thaththa', 'huth', 'පොන්න'];
+
+function timeAgo(time) {
+  const diff = (Date.now() - new Date(time)) / 1000;
+  if (diff < 60) return 'Just now';
+  if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;
+  return `${Math.floor(diff / 86400)} days ago`;
+}
+
+function filterComments(comments) {
+  return comments.filter(c => {
+    const msg = c.message.toLowerCase();
+    return msg.length <= 200 && !forbiddenWords.some(w => msg.includes(w));
+  });
+}
+
+function sortComments(comments, sortBy) {
+  if (sortBy === 'newest') return comments.sort((a, b) => new Date(b.time) - new Date(a.time));
+  if (sortBy === 'oldest') return comments.sort((a, b) => new Date(a.time) - new Date(b.time));
+  if (sortBy === 'mostLiked') return comments.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+  return comments;
+}
+
+function renderComments() {
+  const sorted = sortComments([...allComments], sortSelect.value);
+  const visible = sorted.slice(0, visibleCount);
+
+  commentsList.innerHTML = '';
+  visible.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'comment';
+    div.innerHTML = `
+      <strong>${c.name}</strong>
+      <div class="meta">${timeAgo(c.time)}</div>
+      <p>${c.message}</p>
+      <button onclick="likeComment('${c._id}')">🤍 ${c.likes || 0}</button>
+      <button onclick="replyToComment('${c._id}', '${c.name}')">Reply</button>
+      <div class="replies">
+        ${(c.replies || []).map(r => `
+          <div class="reply">
+            <strong>${r.name}</strong>
+            <div class="meta">${timeAgo(r.time)}</div>
+            <p>${r.message}</p>
+            <button onclick="likeComment('${r._id}')">🤍 ${r.likes || 0}</button>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    commentsList.appendChild(div);
+  });
+
+  seeMoreBtn.style.display = visibleCount >= sorted.length ? 'none' : 'block';
+}
+
+function loadComments() {
+  fetch('/api/comment')
+    .then(res => res.json())
+    .then(data => {
+      allComments = filterComments(data);
+      renderComments();
+    });
+}
+
+function likeComment(id) {
+  fetch(`/api/like/${id}`, { method: 'POST' })
+    .then(() => loadComments())
+    .catch(() => alert('Failed to like'));
+}
+
+function replyToComment(parentId, parentName) {
+  const message = prompt(`Reply to ${parentName}:`);
+  if (!message) return;
+  const name = prompt("Your name:");
+  if (!name) return;
+
+  fetch('/api/comment', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, message, parentId })
+  })
+    .then(res => res.json())
+    .then(r => {
+      if (r.success) loadComments();
+      else alert(r.error);
+    });
+}
+
+
+
+commentForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(commentForm);
+  const data = {
+    name: formData.get('name'),
+    message: formData.get('message')
+  };
+  fetch('/api/comment', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+    .then(res => res.json())
+    .then(result => {
+      if (result.success) {
+        commentForm.reset();
+        loadComments();
+      } else {
+        alert(result.error || 'Failed to post comment.');
+      }
+    });
+});
+
+seeMoreBtn.addEventListener('click', () => {
+  visibleCount += 5;
+  renderComments();
+});
+
+sortSelect.addEventListener('change', renderComments);
+
+// 🔁 Live Refresh Every 10s
+setInterval(loadComments, 10000);
+loadComments();
+    // Fade-in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    faders.forEach(el => observer.observe(el));</script></body>
+
+    </html>
