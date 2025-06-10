@@ -402,41 +402,6 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   }
 });
 
-<script>
-  // Count-up animation function
-  function animateCountUp(el, target, duration) {
-    let start = 0;
-    const startTime = performance.now();
-
-    function update(currentTime) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const currentValue = Math.floor(progress * target);
-
-      el.textContent = currentValue.toLocaleString(); // Optional: adds comma separators
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      } else {
-        el.textContent = target.toLocaleString(); // Ensure final value is accurate
-      }
-    }
-
-    requestAnimationFrame(update);
-  }
-
-  // Fetch the count and animate
-  fetch('/api/botcount')
-    .then(res => res.json())
-    .then(data => {
-      const count = Number(data.count) || 0;
-      const countElement = document.getElementById('botCount');
-      animateCountUp(countElement, count, 2000); // 2000ms = 2 seconds
-    })
-    .catch(() => {
-      document.getElementById('botCount').textContent = 'N/A';
-    });
-
 const commentForm = document.getElementById('commentForm');
 const commentsList = document.getElementById('commentsList');
 const seeMoreBtn = document.getElementById('seeMoreBtn');
@@ -581,4 +546,4 @@ loadComments();
 
     faders.forEach(el => observer.observe(el));</script></body>
 
-    </html>
+                      </html>
