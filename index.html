@@ -35,6 +35,53 @@
 
 .hero-content .btn:hover { transform: scale(1.1); box-shadow: 0 0 30px #ff0077; }
 
+.animated-button {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #0ff;
+  color: #000;
+  border: 2px solid #0ff;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+}
+
+.animated-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, #0ff 10%, transparent 10.01%);
+  background-size: 10px 10px;
+  animation: pulse 2s linear infinite;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.animated-button:hover {
+  background-color: #00f7ff;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+}
+
+@keyframes pulse {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
 /* Services Section */ .services { padding: 100px 20px; text-align: center; background: rgba(255, 255, 255, 0.05); }
 
 .services h2 { font-size: 40px; color: #00ffcc; margin-bottom: 50px; text-shadow: 0 0 15px #00ffcc; }
@@ -145,16 +192,9 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
         <a href="https://git.io/typing-svg">
     <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=45&pause=1000&color=33ff00&center=true&width=910&height=100&lines=The+Best;Multi+Device+Bot;Created+In+Sri+Lanka;Please+Scroll+Down;To+More" alt="Typing SVG">
   </a>  
-        <a href="https://github.com/vijitharanawakage/KING-SANDESH-MD" class="btn">Deploy King Sandesh Md</a>
-                    <img src="https://i.ibb.co/hRXwX2Lc/Manul-Ofc-X.jpg" alt="Pairing Site" class="channel-img">
-                </div>
-                <div class="channel-info">
-                    <h3 class="channel-name">😚 Easy Pairing 🤍</h3>
-                    <a href="https://manu-md-session-gen-3401832cfaf1.herokuapp.com/pair" class="follow-btn">Pair...🔢</a>
-                </div>
-            </div>
-            
-         </div></section>  <!-- Services Section -->  <section class="services" id="services">  
+        <a href="https://replit.com/@vijitharanawak1/Ksmd-Session-Gen-1" target="_blank" class="cyber-btn animated-button">
+  ⚡ Get Session Code
+</a> </div></section>  <!-- Services Section -->  <section class="services" id="services">  
     <h2>Bot Features</h2>  
     <div class="features-container">
     <table class="features-table" style="width:100%; border-collapse: collapse;">
