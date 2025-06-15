@@ -198,11 +198,14 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 
 <section id="login-section" style="text-align: center; padding: 40px;">
   <h2 style="color: #ff4444;">👑 KSMD LOGIN</h2>
-  <button onclick="loginWithGoogle()" style="background:#DB4437;color:white;padding:10px 20px;border:none;border-radius:6px;margin:10px;">Login with Google</button>
-  <button onclick="loginWithGithub()" style="background:#333;color:white;padding:10px 20px;border:none;border-radius:6px;margin:10px;">Login with GitHub</button>
+  <button onclick="loginWithGoogle()">Login with Google</button>
+<button onclick="loginWithGithub()">Login with GitHub</button>
 </section>
+<!-- ✅ Firebase All-in-One SDK (includes app + auth) -->
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase.js"></script>
+
+<!-- ✅ Firebase Config + Login Logic -->
 <script>
-  // Firebase Config
   const firebaseConfig = {
     apiKey: "AIzaSyD-Un39LS4LwhOm-Gu3Kmp59uqe9DAaI8Y",
     authDomain: "ksmd-login-483c9.firebaseapp.com",
@@ -217,23 +220,31 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
 
-  // Google Login
   function loginWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider)
-      .then(result => alert("✅ Logged in as: " + result.user.displayName))
-      .catch(err => alert("❌ " + err.message));
+      .then(result => {
+        alert("✅ Logged in as: " + result.user.displayName);
+      })
+      .catch(err => {
+        alert("❌ " + err.message);
+        console.error(err);
+      });
   }
 
-  // GitHub Login
   function loginWithGithub() {
     const provider = new firebase.auth.GithubAuthProvider();
     auth.signInWithPopup(provider)
-      .then(result => alert("✅ Logged in as: " + result.user.displayName))
-      .catch(err => alert("❌ " + err.message));
+      .then(result => {
+        alert("✅ Logged in as: " + result.user.displayName);
+      })
+      .catch(err => {
+        alert("❌ " + err.message);
+        console.error(err);
+      });
   }
 </script>
-</body>
+
 
   <!-- Services Section -->  <section class="services" id="services">  
     <h2>Bot Features</h2>  
@@ -517,10 +528,6 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
     <footer class="footer">
  <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
-
 
 <script> 
 // Loading animation hide
