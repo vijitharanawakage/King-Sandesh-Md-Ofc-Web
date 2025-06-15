@@ -200,7 +200,41 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
   <h2 style="color: #ff4444;">👑 KSMD LOGIN</h2>
   <button onclick="loginWithGoogle()" style="background:#DB4437;color:white;padding:10px 20px;border:none;border-radius:6px;margin:10px;">Login with Google</button>
   <button onclick="loginWithGithub()" style="background:#333;color:white;padding:10px 20px;border:none;border-radius:6px;margin:10px;">Login with GitHub</button>
-</section>  <!-- Services Section -->  <section class="services" id="services">  
+<script>
+  // Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyD-Un39LS4LwhOm-Gu3Kmp59uqe9DAaI8Y",
+    authDomain: "ksmd-login-483c9.firebaseapp.com",
+    projectId: "ksmd-login-483c9",
+    storageBucket: "ksmd-login-483c9.firebasestorage.app",
+    messagingSenderId: "792864482895",
+    appId: "1:792864482895:web:a42f074bc41a3b773a2c3a",
+    measurementId: "G-C2H0NEDH9H"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // Google Login
+  function loginWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(result => alert("✅ Logged in as: " + result.user.displayName))
+      .catch(err => alert("❌ " + err.message));
+  }
+
+  // GitHub Login
+  function loginWithGithub() {
+    const provider = new firebase.auth.GithubAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(result => alert("✅ Logged in as: " + result.user.displayName))
+      .catch(err => alert("❌ " + err.message));
+  }
+</script>
+</body>
+
+  <!-- Services Section -->  <section class="services" id="services">  
     <h2>Bot Features</h2>  
     <div class="features-container">
     <table class="features-table" style="width:100%; border-collapse: collapse;">
@@ -487,39 +521,7 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
 
 
-<script>
-  // Firebase Config
-  const firebaseConfig = {
-    apiKey: "AIzaSyD-Un39LS4LwhOm-Gu3Kmp59uqe9DAaI8Y",
-    authDomain: "ksmd-login-483c9.firebaseapp.com",
-    projectId: "ksmd-login-483c9",
-    storageBucket: "ksmd-login-483c9.firebasestorage.app",
-    messagingSenderId: "792864482895",
-    appId: "1:792864482895:web:a42f074bc41a3b773a2c3a",
-    measurementId: "G-C2H0NEDH9H"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  // Google Login
-  function loginWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
-      .then(result => alert("✅ Logged in as: " + result.user.displayName))
-      .catch(err => alert("❌ " + err.message));
-  }
-
-  // GitHub Login
-  function loginWithGithub() {
-    const provider = new firebase.auth.GithubAuthProvider();
-    auth.signInWithPopup(provider)
-      .then(result => alert("✅ Logged in as: " + result.user.displayName))
-      .catch(err => alert("❌ " + err.message));
-  }
-  
-  
+<script> 
 // Loading animation hide
 window.addEventListener('load', () => {
   setTimeout(() => {
@@ -595,4 +597,4 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   }
 });</script></body>
 
-            </html>
+    </html>
