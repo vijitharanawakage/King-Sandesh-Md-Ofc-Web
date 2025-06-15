@@ -201,8 +201,12 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
   <button onclick="loginWithGoogle()">Login with Google</button>
 <button onclick="loginWithGithub()">Login with GitHub</button>
 </section>
-<!-- ✅ Firebase All-in-One SDK (includes app + auth) -->
-<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase.js"></script>
+<!-- Firebase App (core) -->
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
+
+<!-- Firebase Auth Only -->
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
+
 
 <!-- ✅ Firebase Config + Login Logic -->
 <script>
@@ -216,7 +220,7 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
     measurementId: "G-C2H0NEDH9H"
   };
 
-  // Initialize Firebase
+  // Firebase Initialize
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
 
@@ -224,11 +228,10 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider)
       .then(result => {
-        alert("✅ Logged in as: " + result.user.displayName);
+        alert("✅ Login Success: " + result.user.displayName);
       })
-      .catch(err => {
-        alert("❌ " + err.message);
-        console.error(err);
+      .catch(error => {
+        alert("❌ Error: " + error.message);
       });
   }
 
@@ -236,11 +239,10 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
     const provider = new firebase.auth.GithubAuthProvider();
     auth.signInWithPopup(provider)
       .then(result => {
-        alert("✅ Logged in as: " + result.user.displayName);
+        alert("✅ Login Success: " + result.user.displayName);
       })
-      .catch(err => {
-        alert("❌ " + err.message);
-        console.error(err);
+      .catch(error => {
+        alert("❌ Error: " + error.message);
       });
   }
 </script>
@@ -605,4 +607,4 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   }
 });</script></body>
 
-    </html>
+</html>
