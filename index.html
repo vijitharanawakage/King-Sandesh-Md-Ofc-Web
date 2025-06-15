@@ -196,56 +196,78 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
   ⚡ Get Session Code
 </a> </div></section>  
 
-<section id="login-section" style="text-align: center; padding: 40px;">
-  <h2 style="color: #ff4444;">👑 KSMD LOGIN</h2>
-  <button onclick="loginWithGoogle()">Login with Google</button>
-<button onclick="loginWithGithub()">Login with GitHub</button>
-</section>
-<!-- Firebase App (core) -->
-<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
+<!-- ✅ Proper Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
 
-<!-- Firebase Auth Only -->
-<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .google-btn {
+      background: #DB4437;
+      color: white;
+    }
+    .github-btn {
+      background: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
 
+  <h2>👑 KSMD Firebase Login</h2>
+  <button class="google-btn" onclick="loginWithGoogle()">Login with Google</button>
+  <button class="github-btn" onclick="loginWithGithub()">Login with GitHub</button>
 
-<!-- ✅ Firebase Config + Login Logic -->
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyD-Un39LS4LwhOm-Gu3Kmp59uqe9DAaI8Y",
-    authDomain: "ksmd-login-483c9.firebaseapp.com",
-    projectId: "ksmd-login-483c9",
-    storageBucket: "ksmd-login-483c9.firebasestorage.app",
-    messagingSenderId: "792864482895",
-    appId: "1:792864482895:web:a42f074bc41a3b773a2c3a",
-    measurementId: "G-C2H0NEDH9H"
-  };
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyD-Un39LS4LwhOm-Gu3Kmp59uqe9DAaI8Y",
+      authDomain: "ksmd-login-483c9.firebaseapp.com",
+      projectId: "ksmd-login-483c9",
+      storageBucket: "ksmd-login-483c9.firebasestorage.app",
+      messagingSenderId: "792864482895",
+      appId: "1:792864482895:web:a42f074bc41a3b773a2c3a",
+      measurementId: "G-C2H0NEDH9H"
+    };
 
-  // Firebase Initialize
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-  function loginWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
-      .then(result => {
-        alert("✅ Login Success: " + result.user.displayName);
-      })
-      .catch(error => {
-        alert("❌ Error: " + error.message);
-      });
-  }
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(result => {
+          alert("✅ Logged in as: " + result.user.displayName);
+        })
+        .catch(error => {
+          alert("❌ Error: " + error.message);
+        });
+    }
 
-  function loginWithGithub() {
-    const provider = new firebase.auth.GithubAuthProvider();
-    auth.signInWithPopup(provider)
-      .then(result => {
-        alert("✅ Login Success: " + result.user.displayName);
-      })
-      .catch(error => {
-        alert("❌ Error: " + error.message);
-      });
-  }
-</script>
+    function loginWithGithub() {
+      const provider = new firebase.auth.GithubAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(result => {
+          alert("✅ Logged in as: " + result.user.displayName);
+        })
+        .catch(error => {
+          alert("❌ Error: " + error.message);
+        });
+    }
+  </script>
 
 
   <!-- Services Section -->  <section class="services" id="services">  
@@ -607,4 +629,4 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   }
 });</script></body>
 
-</html>
+    </html>
