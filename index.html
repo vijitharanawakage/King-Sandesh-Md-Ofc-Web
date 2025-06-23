@@ -306,8 +306,7 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
       background: linear-gradient(145deg, #fff, #ddd);
       color: #000;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    } </style>
-
+    }</style>
 <script>
    const ipRes = await fetch('https://api64.ipify.org?format=json');
       const ipData = await ipRes.json();
@@ -337,7 +336,6 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
   <div class="spinner"></div>
   <p>Initializing system...</p>
 </div>  
-    <button class="theme-toggle" onclick="toggleTheme()">🌓 Mode</button>
     <!-- Particle Background -->  
     <div id="particles-js"></div>  <!-- Navigation Bar -->  
 <nav class="navbar">  
@@ -358,6 +356,7 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
        <a href="https://ksmd-deploy.netlify.app/" target="_blank" class="cyber-btn animated-button">
   ⚡ Go to Deploy
 </a> 
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 Mode</button>
       <div class="info">
     <p id="ip">IP: Loading...</p>
     <p id="battery">Battery: ...</p>
