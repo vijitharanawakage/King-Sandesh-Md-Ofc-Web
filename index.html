@@ -519,6 +519,27 @@ fetch('https://api.ipify.org?format=json')
     document.getElementById('ip').textContent = '🌐 IP: Not available';
   });
 
+    // battery ip theme
+const ipRes = await fetch('https://api64.ipify.org?format=json');
+      const ipData = await ipRes.json();
+      document.getElementById("ip").textContent = `IP: ${ipData.ip}`;
+
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById("time").textContent = `Time: ${now.toLocaleTimeString()}`;
+      }, 1000);
+
+      if (navigator.getBattery) {
+        const battery = await navigator.getBattery();
+        document.getElementById("battery").textContent = `Battery: ${Math.round(battery.level * 100)}%`;
+      } else {
+        document.getElementById("battery").textContent = "Battery info not available";
+      }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      });
+    
 // Loading animation hide
 window.addEventListener('load', () => {
   setTimeout(() => {
