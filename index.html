@@ -657,6 +657,39 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script> 
+// Show Current Time
+function updateTime() {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString();
+  document.getElementById('time').textContent = `🕒 Time: ${timeStr}`;
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// Show Battery Level
+if (navigator.getBattery) {
+  navigator.getBattery().then(battery => {
+    function updateBattery() {
+      const level = Math.round(battery.level * 100);
+      document.getElementById('battery').textContent = `🔋 Battery: ${level}%`;
+    }
+    updateBattery();
+    battery.addEventListener('levelchange', updateBattery);
+  });
+} else {
+  document.getElementById('battery').textContent = '🔋 Battery info not supported';
+}
+
+// Show Public IP Address
+fetch('https://api.ipify.org?format=json')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('ip').textContent = `🌐 IP: ${data.ip}`;
+  })
+  .catch(() => {
+    document.getElementById('ip').textContent = '🌐 IP: Not available';
+  });
+    
 // Loading animation hide
 window.addEventListener('load', () => {
   setTimeout(() => {
