@@ -534,6 +534,99 @@ button {
   });
 </script>
 
+
+
+<!-- Chat Widget -->
+<div id="chatWidget" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+">
+  <button id="chatToggle" style="
+    background-color: #00ffcc;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    color: #000;
+    box-shadow: 0 0 10px #00ffcc;
+    cursor: pointer;
+  ">💬</button>
+  <div id="chatBox" style="
+    display: none;
+    width: 300px;
+    max-height: 400px;
+    background-color: #0a0a23;
+    color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 15px #00ffcc;
+    margin-top: 10px;
+    overflow-y: auto;
+    font-family: 'Orbitron', sans-serif;
+  ">
+    <p style="font-weight:bold; margin-bottom:10px;">Chat with KSMD Bot</p>
+    <div style="margin-bottom:10px;">
+      <input id="userMessage" type="text" placeholder="Type your message..." style="
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      " />
+      <button id="sendMessage" style="
+        width: 100%;
+        padding: 10px;
+        background-color: #ff0077;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+      ">Send</button>
+    </div>
+    <div id="chatHistory" style="
+      font-size: 14px;
+      line-height: 1.4;
+    "></div>
+  </div>
+</div>
+
+
+<script>
+  const chatToggle = document.getElementById('chatToggle');
+  const chatBox = document.getElementById('chatBox');
+  const sendMessage = document.getElementById('sendMessage');
+  const userMessage = document.getElementById('userMessage');
+  const chatHistory = document.getElementById('chatHistory');
+
+  chatToggle.addEventListener('click', () => {
+    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+  });
+
+  sendMessage.addEventListener('click', () => {
+    const msg = userMessage.value.trim();
+    if (msg) {
+      const userBubble = document.createElement('p');
+      userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
+      userBubble.textContent = '🧍 You: ' + msg;
+      chatHistory.appendChild(userBubble);
+
+      setTimeout(() => {
+        const botBubble = document.createElement('p');
+        botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
+        botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
+        chatHistory.appendChild(botBubble);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+      }, 500);
+
+      userMessage.value = '';
+    }
+  });
+</script>
+
 </body>
 
     <!-- Hero Section -->  <section class="hero" id="home">  
@@ -845,6 +938,99 @@ button {
   });
 </script>
 
+
+
+<!-- Chat Widget -->
+<div id="chatWidget" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+">
+  <button id="chatToggle" style="
+    background-color: #00ffcc;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    color: #000;
+    box-shadow: 0 0 10px #00ffcc;
+    cursor: pointer;
+  ">💬</button>
+  <div id="chatBox" style="
+    display: none;
+    width: 300px;
+    max-height: 400px;
+    background-color: #0a0a23;
+    color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 15px #00ffcc;
+    margin-top: 10px;
+    overflow-y: auto;
+    font-family: 'Orbitron', sans-serif;
+  ">
+    <p style="font-weight:bold; margin-bottom:10px;">Chat with KSMD Bot</p>
+    <div style="margin-bottom:10px;">
+      <input id="userMessage" type="text" placeholder="Type your message..." style="
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      " />
+      <button id="sendMessage" style="
+        width: 100%;
+        padding: 10px;
+        background-color: #ff0077;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+      ">Send</button>
+    </div>
+    <div id="chatHistory" style="
+      font-size: 14px;
+      line-height: 1.4;
+    "></div>
+  </div>
+</div>
+
+
+<script>
+  const chatToggle = document.getElementById('chatToggle');
+  const chatBox = document.getElementById('chatBox');
+  const sendMessage = document.getElementById('sendMessage');
+  const userMessage = document.getElementById('userMessage');
+  const chatHistory = document.getElementById('chatHistory');
+
+  chatToggle.addEventListener('click', () => {
+    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+  });
+
+  sendMessage.addEventListener('click', () => {
+    const msg = userMessage.value.trim();
+    if (msg) {
+      const userBubble = document.createElement('p');
+      userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
+      userBubble.textContent = '🧍 You: ' + msg;
+      chatHistory.appendChild(userBubble);
+
+      setTimeout(() => {
+        const botBubble = document.createElement('p');
+        botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
+        botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
+        chatHistory.appendChild(botBubble);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+      }, 500);
+
+      userMessage.value = '';
+    }
+  });
+</script>
+
 </body>
 
 <section id="musicPlayer" style="padding:40px; text-align:center; background:#111; color:#0ff;">
@@ -994,6 +1180,99 @@ button {
       });
     }
 
+  });
+</script>
+
+
+
+<!-- Chat Widget -->
+<div id="chatWidget" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+">
+  <button id="chatToggle" style="
+    background-color: #00ffcc;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    color: #000;
+    box-shadow: 0 0 10px #00ffcc;
+    cursor: pointer;
+  ">💬</button>
+  <div id="chatBox" style="
+    display: none;
+    width: 300px;
+    max-height: 400px;
+    background-color: #0a0a23;
+    color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 15px #00ffcc;
+    margin-top: 10px;
+    overflow-y: auto;
+    font-family: 'Orbitron', sans-serif;
+  ">
+    <p style="font-weight:bold; margin-bottom:10px;">Chat with KSMD Bot</p>
+    <div style="margin-bottom:10px;">
+      <input id="userMessage" type="text" placeholder="Type your message..." style="
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      " />
+      <button id="sendMessage" style="
+        width: 100%;
+        padding: 10px;
+        background-color: #ff0077;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+      ">Send</button>
+    </div>
+    <div id="chatHistory" style="
+      font-size: 14px;
+      line-height: 1.4;
+    "></div>
+  </div>
+</div>
+
+
+<script>
+  const chatToggle = document.getElementById('chatToggle');
+  const chatBox = document.getElementById('chatBox');
+  const sendMessage = document.getElementById('sendMessage');
+  const userMessage = document.getElementById('userMessage');
+  const chatHistory = document.getElementById('chatHistory');
+
+  chatToggle.addEventListener('click', () => {
+    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+  });
+
+  sendMessage.addEventListener('click', () => {
+    const msg = userMessage.value.trim();
+    if (msg) {
+      const userBubble = document.createElement('p');
+      userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
+      userBubble.textContent = '🧍 You: ' + msg;
+      chatHistory.appendChild(userBubble);
+
+      setTimeout(() => {
+        const botBubble = document.createElement('p');
+        botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
+        botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
+        chatHistory.appendChild(botBubble);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+      }, 500);
+
+      userMessage.value = '';
+    }
   });
 </script>
 
@@ -1291,6 +1570,99 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
       });
     }
 
+  });
+</script>
+
+
+
+<!-- Chat Widget -->
+<div id="chatWidget" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+">
+  <button id="chatToggle" style="
+    background-color: #00ffcc;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    color: #000;
+    box-shadow: 0 0 10px #00ffcc;
+    cursor: pointer;
+  ">💬</button>
+  <div id="chatBox" style="
+    display: none;
+    width: 300px;
+    max-height: 400px;
+    background-color: #0a0a23;
+    color: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 15px #00ffcc;
+    margin-top: 10px;
+    overflow-y: auto;
+    font-family: 'Orbitron', sans-serif;
+  ">
+    <p style="font-weight:bold; margin-bottom:10px;">Chat with KSMD Bot</p>
+    <div style="margin-bottom:10px;">
+      <input id="userMessage" type="text" placeholder="Type your message..." style="
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      " />
+      <button id="sendMessage" style="
+        width: 100%;
+        padding: 10px;
+        background-color: #ff0077;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+      ">Send</button>
+    </div>
+    <div id="chatHistory" style="
+      font-size: 14px;
+      line-height: 1.4;
+    "></div>
+  </div>
+</div>
+
+
+<script>
+  const chatToggle = document.getElementById('chatToggle');
+  const chatBox = document.getElementById('chatBox');
+  const sendMessage = document.getElementById('sendMessage');
+  const userMessage = document.getElementById('userMessage');
+  const chatHistory = document.getElementById('chatHistory');
+
+  chatToggle.addEventListener('click', () => {
+    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+  });
+
+  sendMessage.addEventListener('click', () => {
+    const msg = userMessage.value.trim();
+    if (msg) {
+      const userBubble = document.createElement('p');
+      userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
+      userBubble.textContent = '🧍 You: ' + msg;
+      chatHistory.appendChild(userBubble);
+
+      setTimeout(() => {
+        const botBubble = document.createElement('p');
+        botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
+        botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
+        chatHistory.appendChild(botBubble);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+      }, 500);
+
+      userMessage.value = '';
+    }
   });
 </script>
 
