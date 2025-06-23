@@ -36,6 +36,115 @@
 
 .hero-content .btn:hover { transform: scale(1.1); box-shadow: 0 0 30px #ff0077; }
 
+.light-mode {
+      background: linear-gradient(-45deg, #ffffff, #eeeeee, #dddddd, #ffffff);
+      color: black;
+    }
+
+    .info {
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      gap: 15px;
+    }
+
+    .info p {
+      font-size: 20px;
+      padding: 12px 25px;
+      background: linear-gradient(145deg, #1a1a1a, #000);
+      border-radius: 15px;
+      box-shadow: 5px 5px 15px #0a0a0a, -5px -5px 15px #1c1c1c;
+      color: #ff6666;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    .info p:hover {
+      transform: scale(1.05) rotateX(5deg);
+      box-shadow: 0 12px 20px rgba(255, 102, 102, 0.3);
+      color: #ffffff;
+    }
+
+    .light-mode .info p {
+      background: linear-gradient(145deg, #f0f0f0, #ffffff);
+      box-shadow: 5px 5px 15px #cccccc, -5px -5px 15px #ffffff;
+      color: #cc0000;
+    }
+
+    .light-mode .info p:hover {
+      box-shadow: 0 12px 20px rgba(204, 0, 0, 0.2);
+      color: #000000;
+    }
+
+    .weather {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      width: 80%;
+      max-width: 600px;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 12px;
+      padding: 15px 35px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(270deg, #ff4444, #cc0000, #ff2222);
+      background-size: 600% 600%;
+      border: 2px solid transparent;
+      border-radius: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      animation: gradientFlow 5s ease infinite, buttonPulse 2.5s ease-in-out infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.06);
+    }
+
+    .light-mode .button {
+      background: linear-gradient(270deg, #ffdddd, #ffcccc, #ffeeee);
+      color: #660000;
+    }
+
+    .light-mode .button:hover {
+      transform: scale(1.06);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      padding: 12px 18px;
+      background: linear-gradient(145deg, #222, #111);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(255, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 10000;
+      transition: transform 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .light-mode .theme-toggle {
+      background: linear-gradient(145deg, #fff, #ddd);
+      color: #000;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    
 .animated-button {
   margin-top: 20px;
   display: inline-block;
@@ -493,6 +602,27 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script> 
+    // new
+const ipRes = await fetch('https://api64.ipify.org?format=json');
+      const ipData = await ipRes.json();
+      document.getElementById("ip").textContent = `IP: ${ipData.ip}`;
+
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById("time").textContent = `Time: ${now.toLocaleTimeString()}`;
+      }, 1000);
+
+      if (navigator.getBattery) {
+        const battery = await navigator.getBattery();
+        document.getElementById("battery").textContent = `Battery: ${Math.round(battery.level * 100)}%`;
+      } else {
+        document.getElementById("battery").textContent = "Battery info not available";
+      }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    });
+    
 // Show Current Time
 function updateTime() {
   const now = new Date();
