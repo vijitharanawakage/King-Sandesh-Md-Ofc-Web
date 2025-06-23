@@ -234,7 +234,47 @@ body {
 #themeToggle {
   background: var(--button-bg);
   color: var(--button-text);
-} </style>
+} 
+:root {
+  --bg-color: #0a0a23;
+  --text-color: #ffffff;
+  --card-bg: rgba(0, 0, 0, 0.7);
+  --button-bg: #00ffcc;
+  --button-text: #000000;
+  --highlight: #00ffcc;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.service-card,
+.team-member,
+.contact,
+.comment-card,
+.weather,
+.footer {
+  background-color: var(--card-bg);
+}
+
+a,
+h1,
+h2,
+h3,
+p,
+li,
+span,
+button {
+  color: var(--text-color);
+}
+
+#themeToggle {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+</style>
 
 </head>  
 <body>
@@ -252,7 +292,7 @@ body {
         <li><a href="#services">𝙱𝙾𝚃 𝙵𝙴𝙰𝚃𝚄𝚁𝙴𝚂</a></li>  
         <li><a href="#team">𝙺𝚂𝙼𝙳 𝙱𝙾𝚃 𝙾𝚆𝙽𝙴𝚁𝚂</a></li>  
         <li><a href="#contact">𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝚄𝚂</a></li>
-        <li><a href="#officialchanal">𝙾𝙵𝙵𝙸𝙲𝙸𝙰𝙻 𝙻𝙸𝙽𝙺𝚂</a></li>  </ul></nav>  
+        <li><a href="#officialchanal">𝙾𝙵𝙵𝙸𝙲𝙸𝙰𝙻 𝙻𝙸𝙽𝙺𝚂</a></li>  </ul><button id="themeToggle" style="margin-left: 20px; padding: 6px 14px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">🌓 Theme</button></nav>  
     <button id="themeToggle" style="
   margin-left: 20px;
   padding: 6px 14px;
@@ -297,6 +337,39 @@ body {
     isDark = !isDark;
   });
 </script>
+
+<script>
+  const themeToggle = document.getElementById("themeToggle");
+
+  const lightTheme = {
+    "--bg-color": "#ffffff",
+    "--text-color": "#000000",
+    "--card-bg": "#f0f0f0",
+    "--button-bg": "#007BFF",
+    "--button-text": "#ffffff",
+    "--highlight": "#007BFF"
+  };
+
+  const darkTheme = {
+    "--bg-color": "#0a0a23",
+    "--text-color": "#ffffff",
+    "--card-bg": "rgba(0, 0, 0, 0.7)",
+    "--button-bg": "#00ffcc",
+    "--button-text": "#000000",
+    "--highlight": "#00ffcc"
+  };
+
+  let isDark = true;
+
+  themeToggle.addEventListener("click", () => {
+    const theme = isDark ? lightTheme : darkTheme;
+    for (let key in theme) {
+      document.documentElement.style.setProperty(key, theme[key]);
+    }
+    isDark = !isDark;
+  });
+</script>
+
 </body>
 
     <!-- Hero Section -->  <section class="hero" id="home">  
@@ -493,6 +566,39 @@ body {
     });
   });
 </script>
+
+<script>
+  const themeToggle = document.getElementById("themeToggle");
+
+  const lightTheme = {
+    "--bg-color": "#ffffff",
+    "--text-color": "#000000",
+    "--card-bg": "#f0f0f0",
+    "--button-bg": "#007BFF",
+    "--button-text": "#ffffff",
+    "--highlight": "#007BFF"
+  };
+
+  const darkTheme = {
+    "--bg-color": "#0a0a23",
+    "--text-color": "#ffffff",
+    "--card-bg": "rgba(0, 0, 0, 0.7)",
+    "--button-bg": "#00ffcc",
+    "--button-text": "#000000",
+    "--highlight": "#00ffcc"
+  };
+
+  let isDark = true;
+
+  themeToggle.addEventListener("click", () => {
+    const theme = isDark ? lightTheme : darkTheme;
+    for (let key in theme) {
+      document.documentElement.style.setProperty(key, theme[key]);
+    }
+    isDark = !isDark;
+  });
+</script>
+
 </body>
 
 <section id="musicPlayer" style="padding:40px; text-align:center; background:#111; color:#0ff;">
@@ -530,6 +636,39 @@ body {
     }
   });
 </script>
+
+<script>
+  const themeToggle = document.getElementById("themeToggle");
+
+  const lightTheme = {
+    "--bg-color": "#ffffff",
+    "--text-color": "#000000",
+    "--card-bg": "#f0f0f0",
+    "--button-bg": "#007BFF",
+    "--button-text": "#ffffff",
+    "--highlight": "#007BFF"
+  };
+
+  const darkTheme = {
+    "--bg-color": "#0a0a23",
+    "--text-color": "#ffffff",
+    "--card-bg": "rgba(0, 0, 0, 0.7)",
+    "--button-bg": "#00ffcc",
+    "--button-text": "#000000",
+    "--highlight": "#00ffcc"
+  };
+
+  let isDark = true;
+
+  themeToggle.addEventListener("click", () => {
+    const theme = isDark ? lightTheme : darkTheme;
+    for (let key in theme) {
+      document.documentElement.style.setProperty(key, theme[key]);
+    }
+    isDark = !isDark;
+  });
+</script>
+
 </body>
 
 </section> 
@@ -712,6 +851,39 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   } else {
     alert('Please fill in all fields.');
   }
-});</script></body>
+});</script>
+<script>
+  const themeToggle = document.getElementById("themeToggle");
+
+  const lightTheme = {
+    "--bg-color": "#ffffff",
+    "--text-color": "#000000",
+    "--card-bg": "#f0f0f0",
+    "--button-bg": "#007BFF",
+    "--button-text": "#ffffff",
+    "--highlight": "#007BFF"
+  };
+
+  const darkTheme = {
+    "--bg-color": "#0a0a23",
+    "--text-color": "#ffffff",
+    "--card-bg": "rgba(0, 0, 0, 0.7)",
+    "--button-bg": "#00ffcc",
+    "--button-text": "#000000",
+    "--highlight": "#00ffcc"
+  };
+
+  let isDark = true;
+
+  themeToggle.addEventListener("click", () => {
+    const theme = isDark ? lightTheme : darkTheme;
+    for (let key in theme) {
+      document.documentElement.style.setProperty(key, theme[key]);
+    }
+    isDark = !isDark;
+  });
+</script>
+
+</body>
 
 </html>
