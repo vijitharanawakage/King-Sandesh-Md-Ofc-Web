@@ -321,7 +321,32 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
     <h2>Colombo, Sri Lanka</h2>
     <p>28°C</p>
     <p>Partly Cloudy</p>
-  </div> </div></section> 
+  </div>
+<body>
+    <script>
+   const ipRes = await fetch('https://api64.ipify.org?format=json');
+      const ipData = await ipRes.json();
+      document.getElementById("ip").textContent = `IP: ${ipData.ip}`;
+
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById("time").textContent = `Time: ${now.toLocaleTimeString()}`;
+      }, 1000);
+
+      if (navigator.getBattery) {
+        const battery = await navigator.getBattery();
+        document.getElementById("battery").textContent = `Battery: ${Math.round(battery.level * 100)}%`;
+      } else {
+        document.getElementById("battery").textContent = "Battery info not available";
+      }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+  </script>
+ </body>
+        
+    </div></section> 
   <!-- Services Section -->  <section class="services" id="services">  
     <h2>Bot Features</h2>  
     <div class="features-container">
@@ -606,27 +631,6 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script> 
-    // new
-const ipRes = await fetch('https://api64.ipify.org?format=json');
-      const ipData = await ipRes.json();
-      document.getElementById("ip").textContent = `IP: ${ipData.ip}`;
-
-      setInterval(() => {
-        const now = new Date();
-        document.getElementById("time").textContent = `Time: ${now.toLocaleTimeString()}`;
-      }, 1000);
-
-      if (navigator.getBattery) {
-        const battery = await navigator.getBattery();
-        document.getElementById("battery").textContent = `Battery: ${Math.round(battery.level * 100)}%`;
-      } else {
-        document.getElementById("battery").textContent = "Battery info not available";
-      }
-
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-    });
-
 // Loading animation hide
 window.addEventListener('load', () => {
   setTimeout(() => {
