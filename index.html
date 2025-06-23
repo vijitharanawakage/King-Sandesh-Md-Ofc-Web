@@ -194,112 +194,10 @@ display: flex; flex-direction: column; gap: 15px; align-items: center; margin-to
   </a>  
         <a href="https://replit.com/@vijitharanawak1/Ksmd-Session-Gen-1" target="_blank" class="cyber-btn animated-button">
   ⚡ Get Session Code
+</a> 
+       <a href="https://ksmd-deploy.netlify.app/" target="_blank" class="cyber-btn animated-button">
+  ⚡ Go to Deploy
 </a> </div></section> 
- 
-<section>
-  <h2>👑 Mu Login</h2>
-  <button class="google-btn" onclick="loginWithGoogle()">Login with Google</button>
-  <button class="github-btn" onclick="loginWithGithub()">Login with GitHub</button>
- </section>
-
-  <style>
-    button {
-      padding: 12px 24px;
-      margin: 10px;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .google-btn { background-color: #DB4437; color: white; }
-    .github-btn { background-color: #333; color: white; }
-    .logout-btn { background-color: #555; }
-
-    .dashboard {
-      display: none;
-      margin-top: 30px;
-    }
-
-    .profile-img {
-      width: 80px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-<body>
- 
-  <div class="dashboard" id="dashboard">
-    <img id="user-pic" class="profile-img" src="" alt="Profile Picture"/>
-    <h2 id="user-name"></h2>
-    <p id="user-email"></p>
-    <button class="logout-btn" onclick="logout()">Logout</button>
-  </div>
-
- <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-analytics.js"></script>
-  <script>
-  
-    // ✅ YOUR Firebase config pasted below:
-    const firebaseConfig = {
-      apiKey: "AIzaSyD-Un39LS4LwhOm-Gu3Kmp59uqe9DAaI8Y",
-      authDomain: "ksmd-login-483c9.firebaseapp.com",
-      projectId: "ksmd-login-483c9",
-      storageBucket: "ksmd-login-483c9.firebasestorage.app",
-      messagingSenderId: "792864482895",
-      appId: "1:792864482895:web:a42f074bc41a3b773a2c3a",
-      measurementId: "G-C2H0NEDH9H"
-    };
-
-    // 🔥 Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    function loginWithGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider).then(saveUserData).catch(err => alert(err.message));
-    }
-
-    function loginWithGithub() {
-      const provider = new firebase.auth.GithubAuthProvider();
-      auth.signInWithPopup(provider).then(saveUserData).catch(err => alert(err.message));
-    }
-
-    function saveUserData(result) {
-      const user = result.user;
-      document.getElementById("user-name").textContent = user.displayName;
-      document.getElementById("user-email").textContent = user.email;
-      document.getElementById("user-pic").src = user.photoURL;
-      document.getElementById("dashboard").style.display = "block";
-
-      db.collection("users").doc(user.uid).set({
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-        provider: user.providerData[0].providerId,
-        lastLogin: new Date().toISOString()
-      }, { merge: true });
-    }
-
-    function logout() {
-      auth.signOut().then(() => {
-        document.getElementById("dashboard").style.display = "none";
-        alert("✅ Logged out successfully.");
-      });
-    }
-
-    auth.onAuthStateChanged(user => {
-      if (user) saveUserData({ user });
-    });
-  </script>
-  </body>
-
   <!-- Services Section -->  <section class="services" id="services">  
     <h2>Bot Features</h2>  
     <div class="features-container">
@@ -659,4 +557,4 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   }
 });</script></body>
 
-    </html>
+</html>
