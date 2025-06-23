@@ -573,7 +573,37 @@ body {
  <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-<script> 
+<script>
+  const themeToggle = document.getElementById("themeToggle");
+
+  const lightTheme = {
+    "--bg-color": "#ffffff",
+    "--text-color": "#000000",
+    "--card-bg": "#f0f0f0",
+    "--highlight": "#007BFF",
+    "--button-bg": "#007BFF",
+    "--button-text": "#ffffff"
+  };
+
+  const darkTheme = {
+    "--bg-color": "#0a0a23",
+    "--text-color": "#ffffff",
+    "--card-bg": "rgba(0, 0, 0, 0.7)",
+    "--highlight": "#00ffcc",
+    "--button-bg": "#00ffcc",
+    "--button-text": "#000000"
+  };
+
+  let isDark = true;
+
+  themeToggle.addEventListener("click", () => {
+    const theme = isDark ? lightTheme : darkTheme;
+    for (let key in theme) {
+      document.documentElement.style.setProperty(key, theme[key]);
+    }
+    isDark = !isDark;
+  });
+    
 // Show Current Time
 function updateTime() {
   const now = new Date();
