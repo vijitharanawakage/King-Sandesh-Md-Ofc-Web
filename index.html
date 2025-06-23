@@ -595,35 +595,40 @@ button {
 </div>
 
 
+
+
+
 <script>
-  const chatToggle = document.getElementById('chatToggle');
-  const chatBox = document.getElementById('chatBox');
-  const sendMessage = document.getElementById('sendMessage');
-  const userMessage = document.getElementById('userMessage');
-  const chatHistory = document.getElementById('chatHistory');
+  window.addEventListener('DOMContentLoaded', () => {
+    const chatToggle = document.getElementById('chatToggle');
+    const chatBox = document.getElementById('chatBox');
+    const sendMessage = document.getElementById('sendMessage');
+    const userMessage = document.getElementById('userMessage');
+    const chatHistory = document.getElementById('chatHistory');
 
-  chatToggle.addEventListener('click', () => {
-    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
-  });
+    chatToggle.addEventListener('click', () => {
+      chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+    });
 
-  sendMessage.addEventListener('click', () => {
-    const msg = userMessage.value.trim();
-    if (msg) {
-      const userBubble = document.createElement('p');
-      userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
-      userBubble.textContent = '🧍 You: ' + msg;
-      chatHistory.appendChild(userBubble);
+    sendMessage.addEventListener('click', () => {
+      const msg = userMessage.value.trim();
+      if (msg) {
+        const userBubble = document.createElement('p');
+        userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
+        userBubble.textContent = '🧍 You: ' + msg;
+        chatHistory.appendChild(userBubble);
 
-      setTimeout(() => {
-        const botBubble = document.createElement('p');
-        botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
-        botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
-        chatHistory.appendChild(botBubble);
-        chatHistory.scrollTop = chatHistory.scrollHeight;
-      }, 500);
+        setTimeout(() => {
+          const botBubble = document.createElement('p');
+          botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
+          botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
+          chatHistory.appendChild(botBubble);
+          chatHistory.scrollTop = chatHistory.scrollHeight;
+        }, 500);
 
-      userMessage.value = '';
-    }
+        userMessage.value = '';
+      }
+    });
   });
 </script>
 
@@ -999,35 +1004,40 @@ button {
 </div>
 
 
+
+
+
 <script>
-  const chatToggle = document.getElementById('chatToggle');
-  const chatBox = document.getElementById('chatBox');
-  const sendMessage = document.getElementById('sendMessage');
-  const userMessage = document.getElementById('userMessage');
-  const chatHistory = document.getElementById('chatHistory');
+  window.addEventListener('DOMContentLoaded', () => {
+    const chatToggle = document.getElementById('chatToggle');
+    const chatBox = document.getElementById('chatBox');
+    const sendMessage = document.getElementById('sendMessage');
+    const userMessage = document.getElementById('userMessage');
+    const chatHistory = document.getElementById('chatHistory');
 
-  chatToggle.addEventListener('click', () => {
-    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
-  });
+    chatToggle.addEventListener('click', () => {
+      chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+    });
 
-  sendMessage.addEventListener('click', () => {
-    const msg = userMessage.value.trim();
-    if (msg) {
-      const userBubble = document.createElement('p');
-      userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
-      userBubble.textContent = '🧍 You: ' + msg;
-      chatHistory.appendChild(userBubble);
+    sendMessage.addEventListener('click', () => {
+      const msg = userMessage.value.trim();
+      if (msg) {
+        const userBubble = document.createElement('p');
+        userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
+        userBubble.textContent = '🧍 You: ' + msg;
+        chatHistory.appendChild(userBubble);
 
-      setTimeout(() => {
-        const botBubble = document.createElement('p');
-        botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
-        botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
-        chatHistory.appendChild(botBubble);
-        chatHistory.scrollTop = chatHistory.scrollHeight;
-      }, 500);
+        setTimeout(() => {
+          const botBubble = document.createElement('p');
+          botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
+          botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
+          chatHistory.appendChild(botBubble);
+          chatHistory.scrollTop = chatHistory.scrollHeight;
+        }, 500);
 
-      userMessage.value = '';
-    }
+        userMessage.value = '';
+      }
+    });
   });
 </script>
 
@@ -1244,35 +1254,40 @@ button {
 </div>
 
 
+
+
+
 <script>
-  const chatToggle = document.getElementById('chatToggle');
-  const chatBox = document.getElementById('chatBox');
-  const sendMessage = document.getElementById('sendMessage');
-  const userMessage = document.getElementById('userMessage');
-  const chatHistory = document.getElementById('chatHistory');
+  window.addEventListener('DOMContentLoaded', () => {
+    const chatToggle = document.getElementById('chatToggle');
+    const chatBox = document.getElementById('chatBox');
+    const sendMessage = document.getElementById('sendMessage');
+    const userMessage = document.getElementById('userMessage');
+    const chatHistory = document.getElementById('chatHistory');
 
-  chatToggle.addEventListener('click', () => {
-    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
-  });
+    chatToggle.addEventListener('click', () => {
+      chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+    });
 
-  sendMessage.addEventListener('click', () => {
-    const msg = userMessage.value.trim();
-    if (msg) {
-      const userBubble = document.createElement('p');
-      userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
-      userBubble.textContent = '🧍 You: ' + msg;
-      chatHistory.appendChild(userBubble);
+    sendMessage.addEventListener('click', () => {
+      const msg = userMessage.value.trim();
+      if (msg) {
+        const userBubble = document.createElement('p');
+        userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
+        userBubble.textContent = '🧍 You: ' + msg;
+        chatHistory.appendChild(userBubble);
 
-      setTimeout(() => {
-        const botBubble = document.createElement('p');
-        botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
-        botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
-        chatHistory.appendChild(botBubble);
-        chatHistory.scrollTop = chatHistory.scrollHeight;
-      }, 500);
+        setTimeout(() => {
+          const botBubble = document.createElement('p');
+          botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
+          botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
+          chatHistory.appendChild(botBubble);
+          chatHistory.scrollTop = chatHistory.scrollHeight;
+        }, 500);
 
-      userMessage.value = '';
-    }
+        userMessage.value = '';
+      }
+    });
   });
 </script>
 
@@ -1634,35 +1649,40 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
 </div>
 
 
+
+
+
 <script>
-  const chatToggle = document.getElementById('chatToggle');
-  const chatBox = document.getElementById('chatBox');
-  const sendMessage = document.getElementById('sendMessage');
-  const userMessage = document.getElementById('userMessage');
-  const chatHistory = document.getElementById('chatHistory');
+  window.addEventListener('DOMContentLoaded', () => {
+    const chatToggle = document.getElementById('chatToggle');
+    const chatBox = document.getElementById('chatBox');
+    const sendMessage = document.getElementById('sendMessage');
+    const userMessage = document.getElementById('userMessage');
+    const chatHistory = document.getElementById('chatHistory');
 
-  chatToggle.addEventListener('click', () => {
-    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
-  });
+    chatToggle.addEventListener('click', () => {
+      chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+    });
 
-  sendMessage.addEventListener('click', () => {
-    const msg = userMessage.value.trim();
-    if (msg) {
-      const userBubble = document.createElement('p');
-      userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
-      userBubble.textContent = '🧍 You: ' + msg;
-      chatHistory.appendChild(userBubble);
+    sendMessage.addEventListener('click', () => {
+      const msg = userMessage.value.trim();
+      if (msg) {
+        const userBubble = document.createElement('p');
+        userBubble.style = "background:#333;padding:8px;border-radius:6px;margin:4px 0;";
+        userBubble.textContent = '🧍 You: ' + msg;
+        chatHistory.appendChild(userBubble);
 
-      setTimeout(() => {
-        const botBubble = document.createElement('p');
-        botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
-        botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
-        chatHistory.appendChild(botBubble);
-        chatHistory.scrollTop = chatHistory.scrollHeight;
-      }, 500);
+        setTimeout(() => {
+          const botBubble = document.createElement('p');
+          botBubble.style = "background:#222;padding:8px;border-radius:6px;margin:4px 0;color:#00ffcc;";
+          botBubble.textContent = '🤖 KSMD Bot: Thank you for your message!';
+          chatHistory.appendChild(botBubble);
+          chatHistory.scrollTop = chatHistory.scrollHeight;
+        }, 500);
 
-      userMessage.value = '';
-    }
+        userMessage.value = '';
+      }
+    });
   });
 </script>
 
