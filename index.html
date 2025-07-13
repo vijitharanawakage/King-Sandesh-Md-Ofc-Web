@@ -1343,6 +1343,29 @@ document.addEventListener("DOMContentLoaded", () => {
   </p>
 </section>
 
+  <!-- ✅ Special Thanks Section with video background -->
+  <section id="special-thanks" style="position: relative; padding: 100px 20px; text-align: center; overflow: hidden;">
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); z-index: 1; object-fit: cover;">
+      <source src="https://files.catbox.moe/lhj3ld.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Overlay -->
+    <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.6); z-index: 2;"></div>
+
+    <!-- Thank section -->
+    <div style="position: relative; z-index: 3; color: #ddd; max-width: 800px; margin: 0 auto;">
+      <h2 style="color: #00ffcc; text-shadow: 0 0 20px #00ffcc, 0 0 40px #ff0077;">💖 Special Thanks</h2>
+      <p style="font-size: 18px; margin-top: 20px;">We proudly thank those who made this bot project possible:</p>
+      <ul style="list-style: none; padding: 0; margin-top: 30px; font-size: 18px;">
+        <li style="margin-bottom: 12px;"><strong style="color:#ff0077;">MR UNKNOWN</strong> – Founder and Developer</li>
+        <li style="margin-bottom: 12px;"><strong style="color:#00ffff;">GRAY WOLF</strong> – Co-Owner & Beta Tester</li>
+        <li style="margin-bottom: 12px;"><strong style="color:#ffff00;">Dark Dragon Family OFC</strong> – Inspiration</li>
+        <li style="margin-bottom: 12px;"><strong style="color:#ff8800;">All KSMD Users</strong> – Your support means everything!</li>
+      </ul>
+    </div>
+  </section>
+
 <p style="text-align: center; font-size: 14px; color: red;">
   Content is protected. Copying, cloning, or redistributing without permission is strictly prohibited and may lead to action under the DMCA.
 </p>
